@@ -12,14 +12,6 @@ this.Cardiogram = function()
         this.y = Math.round(y + height / 2)
         this.heightMod = height / 2 * (1 - this.padding)
 
-        if (this.history.length == 0)
-        {
-            for (var i = 0; i < width; i++)
-            {
-                this.history.push(0)
-            }
-        }
-
         this.present = new Date()
 
         if (this.present.getTime() - this.past.getTime() > 1000 * 60 / player.heartRate)
@@ -42,16 +34,33 @@ this.Cardiogram = function()
 
         this.currentX = 0
 
-        for (var j = this.history.length - width; j < this.history.length; j++)
+        if (this.history.length >= width)
         {
-            l.ctx.beginPath()
-            l.ctx.moveTo(x + this.currentX - 1, this.y + this.history[j - 1])
-            l.ctx.lineTo(x + this.currentX, this.y + this.history[j])
-            l.ctx.lineWidth = 2
-            l.ctx.strokeStyle = game.color
-            l.ctx.stroke()
+            for (var i = this.history.length - width; i < this.history.length; i++)
+            {
+                l.ctx.beginPath()
+                l.ctx.moveTo(x + this.currentX - 1, this.y + this.history[i - 1])
+                l.ctx.lineTo(x + this.currentX, this.y + this.history[i])
+                l.ctx.lineWidth = 2
+                l.ctx.strokeStyle = game.color
+                l.ctx.stroke()
 
-            this.currentX++
+                this.currentX++
+            }
+        }
+        else
+        {
+            for (var i = 0; i < this.history.length; i++)
+            {
+                l.ctx.beginPath()
+                l.ctx.moveTo(x + this.currentX - 1, this.y + this.history[i - 1])
+                l.ctx.lineTo(x + this.currentX, this.y + this.history[i])
+                l.ctx.lineWidth = 2
+                l.ctx.strokeStyle = game.color
+                l.ctx.stroke()
+
+                this.currentX++
+            }
         }
     }
 }

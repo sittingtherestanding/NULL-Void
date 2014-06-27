@@ -13,7 +13,7 @@ var typewriter = new Typewriter()
 	typewriter.setFont('Furore')
 
 // ui colors
-var blue = '#ccffcc'
+var green = '#ccffcc'
 
 // ui values
 var uiPadding = 12
@@ -86,7 +86,7 @@ var screens = new Object()
 		y: uiPadding,
 		width: uiBlock.half.width,
 		height: uiBlock.half.height,
-		color: blue
+		color: green
 	}
 
 	screens.vitals.bloodPressure = {
@@ -94,7 +94,7 @@ var screens = new Object()
 		y: uiPadding + uiBlock.title.fontSize + uiBlock.title.padding + uiPadding + uiBlock.half.height,
 		width: uiBlock.half.width,
 		height: uiBlock.half.height,
-		color: blue
+		color: green
 	}
 
 	screens.vitals.heartRate = {
@@ -102,7 +102,7 @@ var screens = new Object()
 		y: uiPadding * 3 + (uiBlock.title.fontSize + uiBlock.title.padding) * 2 + uiBlock.half.height * 2,
 		width: uiBlock.full.width,
 		height: uiBlock.full.height,
-		color: blue
+		color: green
 	}
 
 	screens.vitals.respiratoryRate = {
@@ -110,9 +110,10 @@ var screens = new Object()
 		y: uiPadding * 4 + (uiBlock.title.fontSize + uiBlock.title.padding) * 3 + uiBlock.half.height * 2 + uiBlock.full.height,
 		width: uiBlock.full.width,
 		height: uiBlock.full.height,
-		color: blue
+		color: green
 	}
 
+var capnometer = new Capnometer()
 var cardiogram = new Cardiogram()
 
 // Player values
@@ -145,10 +146,11 @@ var main = function()
 
 	// Respiratory rate
 	drawBlock('respiratory rate', '', screens.vitals.respiratoryRate)
+	capnometer.draw(screens.vitals.respiratoryRate.x, screens.vitals.respiratoryRate.y + uiBlock.title.fontSize + uiBlock.title.padding, screens.vitals.respiratoryRate.width, screens.vitals.respiratoryRate.height)
 
 	// Navigation
-	pencil.setColor(blue).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 3).fillRectangle()
-	typewriter.setColor(blue).setSize(uiNavigation.fontSize)
+	pencil.setColor(green).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 3).fillRectangle()
+	typewriter.setColor(green).setSize(uiNavigation.fontSize)
 	typewriter.setAlignment('left').setPosition(uiNavigation.buttons.vitals.x, uiNavigation.buttons.vitals.y).write('vitals')
 	typewriter.setAlignment('center').setPosition(uiNavigation.buttons.conditions.x, uiNavigation.buttons.conditions.y).write('conditions')
 	typewriter.setAlignment('center').setPosition(uiNavigation.buttons.drones.x, uiNavigation.buttons.drones.y).write('drones')
