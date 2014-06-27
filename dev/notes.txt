@@ -1,0 +1,11 @@
+Needed interface elements:
+	Communication
+	Repair
+	Research
+	Status
+		Day/night
+		Weather
+		Droid status
+	Map
+	Vitals
+	Battery meter

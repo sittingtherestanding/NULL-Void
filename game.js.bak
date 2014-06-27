@@ -1,0 +1,353 @@
+var mechs = 0
+var money = 250
+
+setInterval(function()
+{
+	money += 10 + 10 * mechs
+}, 1000)
+
+var clockTick = 500
+var currentHour = 6
+var currentMinute = 0
+
+// Clock update interval
+setInterval(function()
+{
+	if (currentMinute < 59)
+	{
+		currentMinute++
+	}
+	else if (currentHour < 24)
+	{
+		currentHour++
+		currentMinute = 0
+	}
+	else
+	{
+		currentHour = 0
+		currentMinute = 0
+	}
+}, clockTick)
+
+var game = new Lorina()
+	game.setTitle('Mechs')
+		.setColor('#111111')
+		.setRoomSize(320, 568)
+		.setDomSize(320, 568)
+		.setDomPosition(window.innerWidth / 2 - l.dom.width / 2, window.innerHeight / 2 - l.dom.height / 2)
+
+var normalColor = '#DDDDDD'
+var successColor = '#39CCCC'
+var expensiveColor = '#4c4c4c'
+
+var staticModifier = 4 // The "size" of static "pixels"
+
+var padding = 30
+
+var staticHeightUI = padding * 2
+var navigationHeightUI = padding / 2
+
+var staticPositionUI = 0
+var navigationPositionUI = staticPositionUI + staticHeightUI + padding
+var storePositionUI = navigationPositionUI + navigationHeightUI + padding
+
+var tool = new Tool()
+var mouse = new Mouse()
+
+var typewriter = new Typewriter()
+	typewriter.setFont('LadyIce')
+
+// Used for drawing shapes (like static pixels)
+var pencil = new Pencil()
+	pencil.setColor(normalColor)
+
+// Ambiance stuff
+
+var lensFlare = new Entity()
+	lensFlare.setSprite('images/flare.png')
+			 .setPosition(100, 100)
+			 .setSize(800, 800)
+			 .setAnchor(400, 400)
+			 .setOpacity(0.25)
+
+// Snowflakes
+var snowflakes = new Group()
+
+/*
+var i = 100
+while (i--)
+{
+	var flake = new Entity()
+		flake.setSprite('images/flake.png')
+				.setPosition(tool.random(0, l.room.width), tool.random(0, l.room.height))
+				.setSize(11, 11)
+				.setAnchor(5, 5)
+				.setOpacity(tool.random(0.5, 0.85))
+				.setFriction(0.003)
+				.pushVertical(tool.random(1, 2))
+				.pushHorizontal(tool.random(-1, 1))
+				.spin(tool.random(0.2, 1))
+		snowflakes.add(flake)
+}
+*/
+
+setInterval(function()
+{
+	var flake = new Entity()
+		flake.setSprite('images/flake.png')
+				.setPosition(tool.random(0, l.room.width), 0)
+				.setSize(11, 11)
+				.setAnchor(5, 5)
+				.setOpacity(tool.random(0.5, 0.85))
+				.setFriction(0.003)
+				.pushVertical(tool.random(1, 2))
+				.pushHorizontal(tool.random(-1, 1))
+				.spin(tool.random(-1, 1))
+		snowflakes.add(flake)
+}, 100)
+
+// Screen scratches
+var screenScratches = new Group()
+
+var i = 200
+while (i--)
+{
+	var screenScratch = new Entity()
+		screenScratch.setSprite('images/scratch.png')
+					 .setPosition(tool.random(0, l.room.width), tool.random(0, l.room.height))
+					 .setOpacity(tool.random(0.01, 0.2))
+		screenScratches.add(screenScratch)
+}
+
+// Navigation stuff
+
+var homeButton = new Button()
+	homeButton.setString('home')
+			  .setSize(100, 26)
+			  .setStroke(2)
+			  .setFont('LadyIce')
+			  .setFontSize(20)
+			  .setNormalColor(expensiveColor)
+
+// Interface stuff
+var bootRadius = 0
+var gridPosition = 0
+var gridSize = 75
+var gridColor = '#01FF70'
+var gridOpacity = 0.25
+
+// Store stuff
+
+var scoutCost = 300
+var transportCost = 700
+var liftCost = 1000
+
+var setupStoreButton = function(button)
+{
+	button.setSize(75, 26)
+	button.setStroke(2)
+	button.setFont('LadyIce')
+	button.setFontSize(20)
+	button.setNormalColor(normalColor)
+	button.setSuccessColor(successColor)
+	button.setScaleTime(100)
+	button.setPauseTime(150, 1500)
+}
+
+var scoutButton = new Button()
+	scoutButton.setString(scoutCost + 'z', 'built')
+			   .setCompletionTime(2000)
+	setupStoreButton(scoutButton)
+
+var transportButton = new Button()
+	transportButton.setString(transportCost + 'z', 'built')
+				   .setCompletionTime(10000)
+	setupStoreButton(transportButton)
+
+var liftButton = new Button()
+	liftButton.setString(liftCost + 'z', 'built')
+			  .setCompletionTime(20000)
+	setupStoreButton(liftButton)
+
+var main = function()
+{
+	watchButton(scoutButton, scoutCost)
+	watchButton(transportButton, transportCost)
+	watchButton(liftButton, liftCost)
+
+	var i = snowflakes.database.length
+	while (i--)
+	{
+		if (snowflakes.database[i].momentum.y < 0.1)
+		{
+			if (snowflakes.database[i].opacity > 0.05)
+			{
+				snowflakes.database[i].opacity -= 0.005
+			}
+			else
+			{
+				snowflakes.database[i].delete()
+			}
+		}
+	}
+
+	game.blank()
+
+	// Boot thingy
+	if (bootRadius < l.room.height + 100)
+	{
+		bootRadius += 15
+		pencil.setColor('#004860').setPosition(l.room.width / 2, l.room.height / 2).setRadius(bootRadius).fillCircle()
+	}
+	else
+	{
+		game.setColor('#004860')
+
+		drawGrid()
+
+		drawStatic()
+
+		drawNavigation()
+
+		// Store stuff
+
+		typewriter.setColor(normalColor).setSize(20)
+		typewriter.setAlignment('left').setPosition(padding, storePositionUI).write(money + 'z')
+
+		if (mechs !== 1)
+		{
+			typewriter.setAlignment('right').setPosition(l.room.width - padding, storePositionUI).write(mechs + ' mechs')
+		}
+		else
+		{
+			typewriter.setAlignment('right').setPosition(l.room.width - padding, storePositionUI).write(mechs + ' mech')
+		}
+
+		pencil.setColor(normalColor).setPosition(padding / 2, storePositionUI + padding).setSize(l.room.width - padding, 2).fillRectangle()
+
+		drawStoreItem(scoutButton, scoutCost, 0, 'm130 scout mech')
+		drawStoreItem(transportButton, transportCost, 1, 'p48 heavy transport')
+		drawStoreItem(liftButton, liftCost, 2, 'g891 airlift x-series')
+
+		// Effects should be drawn last
+		lensFlare.draw()
+		snowflakes.applyPhysics().buffer()
+		screenScratches.draw()
+	}
+
+	game.draw()
+}
+
+game.start(main)
+
+var drawGrid = function()
+{
+	// Horizontal lines
+	var i = Math.ceil(l.room.height / gridSize)
+	while (i--)
+	{
+		pencil.setOpacity(gridOpacity).setColor(gridColor).setPosition(0, gridSize * i + gridPosition).setSize(l.room.width, 1).fillRectangle()
+	}
+
+	// Vertical lines
+	var i = Math.ceil(l.room.width / gridSize)
+	while (i--)
+	{
+		pencil.setOpacity(gridOpacity).setColor(gridColor).setPosition(gridSize * i + gridPosition, 0).setSize(1, l.room.height).fillRectangle()
+	}
+
+	if (gridPosition < gridSize)
+	{
+		gridPosition += 0.25
+	}
+	else
+	{
+		gridPosition = 0
+	}
+}
+
+var drawStatic = function()
+{
+	var i = Math.round(l.room.width / staticModifier)
+	while (i--)
+	{
+		var j = Math.round(staticHeightUI / staticModifier)
+		while (j--)
+		{
+			if (Math.round(tool.random(0, 1)) == 0)
+			{
+				var color = '#dddddd'
+			}
+			else
+			{
+				var color = '#aaaaaa'
+			}
+
+			pencil.setOpacity(1).setPosition(i * staticModifier, j * staticModifier).setSize(staticModifier, staticModifier).setColor(color).fillRectangle()
+		}
+	}
+}
+
+var drawNavigation = function()
+{
+	if (currentHour < 10)
+	{
+		var hour = '0' + currentHour
+	}
+	else
+	{
+		var hour = currentHour
+	}
+
+	if (currentMinute < 10)
+	{
+		var minute = '0' + currentMinute
+	}
+	else
+	{
+		var minute = currentMinute
+	}
+
+	typewriter.setColor(successColor).setSize(25)
+	typewriter.setAlignment('left').setPosition(padding, navigationPositionUI).write(hour + ':' + minute)
+
+	homeButton.setPosition(l.room.width - padding, navigationPositionUI).draw()
+}
+
+var drawStoreItem = function(button, cost, row, title)
+{
+	var rowSpacing = padding * row + row * (padding / 2) + padding * 2
+
+	typewriter.setColor(normalColor).setSize(20)
+	typewriter.setAlignment('left').setPosition(padding, storePositionUI + rowSpacing).write(title)
+
+	if (button.ready && money >= cost)
+	{
+		button.setNormalColor(normalColor).setPosition(l.room.width - padding, storePositionUI + rowSpacing).draw()		
+	}
+	else if (button.ready)
+	{
+		button.setNormalColor(expensiveColor).setPosition(l.room.width - padding, storePositionUI + rowSpacing).draw()
+	}
+	else
+	{
+		button.setNormalColor(normalColor).setPosition(l.room.width - padding, storePositionUI + rowSpacing).draw()		
+	}
+}
+
+var watchButton = function(button, cost)
+{
+	if (mouse.checkLeftClicked(button))
+	{
+		if (button.ready && money >= cost)
+		{
+			money -= cost
+			button.click('addMech()')
+		}
+	}
+}
+
+var addMech = function()
+{
+	mechs++
+}

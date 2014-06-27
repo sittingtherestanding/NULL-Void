@@ -1,0 +1,62 @@
+<canvas id = "canvas" width = "200" height = "150" style = "background-color: #002e50"></canvas>
+
+<script type = "text/javascript">
+    var canvas = document.getElementById('canvas')
+    var ctx = canvas.getContext('2d')
+        ctx.lineWidth = 1
+        ctx.strokeStyle = '#339999'
+
+    var x = 200
+    var initY = canvas.height / 2
+    var y = initY
+
+    var padding = 25
+
+    var status = 'in'
+    var deepness = 1 // Percent
+
+    var history = new Array()
+
+    var period = 125
+    var amplitude = 40
+    var counter = 0
+
+    var drawWave = function()
+    {
+        y = initY + -amplitude * Math.sin(counter)
+        counter += Math.PI / period
+
+        if (history.length >= 200)
+        {
+            history.push(y)
+
+            x = 200
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+            for (var j = history.length - 200; j < history.length; j++)
+            {
+                ctx.beginPath()
+                ctx.moveTo(x + 1, history[j - 1])
+                ctx.lineTo(x, history[j])
+                ctx.stroke()
+
+                x--
+            }
+        }
+        else
+        {
+            history.push(y)
+
+            ctx.beginPath()
+            ctx.moveTo(x + 1, history[history.length - 2])
+            ctx.lineTo(x, history[history.length - 1])
+            ctx.stroke()
+
+            x--
+        }
+
+        requestAnimationFrame(drawWave)
+    }
+
+    drawWave()
+</script>
