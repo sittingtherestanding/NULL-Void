@@ -123,8 +123,12 @@ var player = {
 		top: 117,
 		bottom: 76
 	},
-	heartRate: 80,
-	respiratoryRate: 32
+	heartRate: 70,
+	breathing: 
+	{
+		deepness: 1,
+		rate: 10
+	}
 }
 
 var main = function()
