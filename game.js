@@ -63,11 +63,9 @@ var uiBlock = {
 		height: (uiNavigation.position.y - (uiPadding * 7) - ((uiBlock.title.fontSize + uiBlock.title.padding) * 4)) / 4
 	}
 
-	console.log(uiBlock.half.height)
-
 	uiBlock.full = {
 		width: l.room.width - uiPadding * 2,
-		height: (uiNavigation.position.y - (uiPadding * 7) - (uiBlock.title.fontSize + uiBlock.title.padding * 4)) / 4
+		height: (uiNavigation.position.y - (uiPadding * 7) - ((uiBlock.title.fontSize + uiBlock.title.padding) * 4)) / 4
 	}
 
 var screens = new Object()
@@ -115,6 +113,8 @@ var screens = new Object()
 		color: blue
 	}
 
+var cardiogram = new Cardiogram()
+
 // Player values
 var player = {
 	temperature: 98.6,
@@ -122,7 +122,7 @@ var player = {
 		top: 117,
 		bottom: 76
 	},
-	heartRate: 120,
+	heartRate: 80,
 	respiratoryRate: 32
 }
 
@@ -141,6 +141,7 @@ var main = function()
 
 	// Heart rate
 	drawBlock('heart rate', '', screens.vitals.heartRate)
+	cardiogram.draw(screens.vitals.heartRate.x, screens.vitals.heartRate.y + uiBlock.title.fontSize + uiBlock.title.padding, screens.vitals.heartRate.width, screens.vitals.heartRate.height)
 
 	// Respiratory rate
 	drawBlock('respiratory rate', '', screens.vitals.respiratoryRate)
