@@ -14,7 +14,7 @@ this.Cardiogram = function()
 
         this.present = new Date()
 
-        if (this.present.getTime() - this.past.getTime() > 1000 * 60 / player.heartRate)
+        if (this.present.getTime() - this.past.getTime() > 1000 * 60 / player.heart.rate)
         {
             this.beatIndex = 1 // Start the beat
 

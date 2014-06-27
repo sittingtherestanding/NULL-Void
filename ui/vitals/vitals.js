@@ -50,28 +50,20 @@ var drawVitals = function()
     vitalsSkeleton.draw()
 
     // Body temperature
-    drawBlock('temperature', player.temperature + ' F', screens.vitals.bodyTemperature)
+    drawBlock('temperature', Math.round(player.temperature.value * 10) / 10 + ' F', screens.vitals.bodyTemperature)
 
     // Blood pressure
     drawBlock('blood pressure', '', screens.vitals.bloodPressure)
-    typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 3 + screens.vitals.bloodPressure.height / 18).write(player.bloodPressure.top)
+    typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 3 + screens.vitals.bloodPressure.height / 18).write(Math.round(player.bloodPressure.top))
     pencil.setColor(game.color).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 16, screens.vitals.bloodPressure.y + uiBlock.title.height + screens.vitals.bloodPressure.height / 2.35 + screens.vitals.bloodPressure.height / 18).setSize(screens.vitals.bloodPressure.width / 3.5, 2).fillRectangle()
-    typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 3 * 2 + screens.vitals.bloodPressure.height / 18).write(player.bloodPressure.bottom)
+    typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 3 * 2 + screens.vitals.bloodPressure.height / 18).write(Math.round(player.bloodPressure.bottom))
     typewriter.setAlignment('left').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5 * 2, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 2 + screens.vitals.bloodPressure.height / 18).write('mm hg')
 
     // Heart rate
-    drawBlock('heart rate', '', screens.vitals.heartRate)
+    drawBlock('heart rate', '', screens.vitals.heartRate, Math.round(player.heart.rate) + ' beats per minute')
     cardiogram.draw(screens.vitals.heartRate.x, screens.vitals.heartRate.y + uiBlock.title.height, screens.vitals.heartRate.width, screens.vitals.heartRate.height)
 
     // Respiratory rate
-    drawBlock('respiratory rate', '', screens.vitals.respiratoryRate)
+    drawBlock('respiratory rate', '', screens.vitals.respiratoryRate, Math.round(player.breathing.rate) + ' breaths per minute')
     capnometer.draw(screens.vitals.respiratoryRate.x, screens.vitals.respiratoryRate.y + uiBlock.title.height, screens.vitals.respiratoryRate.width, screens.vitals.respiratoryRate.height)
-
-    // Navigation
-    pencil.setOpacity(uiBlock.opacity).setColor(green).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 2).fillRectangle()
-    typewriter.setColor(green).setSize(uiNavigation.fontSize)
-    typewriter.setAlignment('left').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.vitals.x, uiNavigation.buttons.vitals.y).write('vitals')
-    typewriter.setAlignment('center').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.conditions.x, uiNavigation.buttons.conditions.y).write('conditions')
-    typewriter.setAlignment('center').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.drones.x, uiNavigation.buttons.drones.y).write('drones')
-    typewriter.setAlignment('right').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.inventory.x, uiNavigation.buttons.inventory.y).write('inventory')
 }

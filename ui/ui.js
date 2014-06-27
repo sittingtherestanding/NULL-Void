@@ -1,5 +1,6 @@
 // UI colors
 var green = '#ccffcc'
+var red = '#ff6666'
 
 // UI values
 var uiPadding = 12
@@ -56,9 +57,37 @@ var uiBlock = {
         height: (uiNavigation.position.y - (uiPadding * 5) - ((uiBlock.title.height) * 4)) / 4
     }
 
-var drawBlock = function(title, content, block)
+var drawBlock = function(title, content, block, subtitle)
 {
     pencil.setOpacity(uiBlock.opacity).setColor(block.color).setPosition(block.x, block.y + uiBlock.title.height).setSize(block.width, block.height).fillRectangle()
     typewriter.setAlignment('left').setOpacity(uiBlock.opacity).setColor(block.color).setSize(uiBlock.title.fontSize).setPosition(block.x, block.y).write(title)
     typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(block.x + block.width / 2, block.y + block.height / 2 + block.height / 18).write(content)
+
+    if (subtitle)
+    {
+        typewriter.setAlignment('right').setOpacity(uiBlock.opacity).setColor(block.color).setSize(uiBlock.title.fontSize * 0.75).setPosition(block.x + block.width, block.y + uiBlock.title.fontSize * 0.25).write(subtitle)
+    }
+}
+
+var drawNavigation = function()
+{
+    pencil.setOpacity(uiBlock.opacity).setColor(green).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 2).fillRectangle()
+    
+    typewriter.setSize(uiNavigation.fontSize)
+
+    if (player.temperature.warning || player.bloodPressure.warning || player.heart.warning || player.breathing.warning)
+    {
+        typewriter.setColor(red)
+    }
+    else
+    {
+        typewriter.setColor(green)
+    }
+
+    typewriter.setAlignment('left').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.vitals.x, uiNavigation.buttons.vitals.y).write('vitals')
+
+    typewriter.setColor(green)
+    typewriter.setAlignment('center').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.conditions.x, uiNavigation.buttons.conditions.y).write('conditions')
+    typewriter.setAlignment('center').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.drones.x, uiNavigation.buttons.drones.y).write('drones')
+    typewriter.setAlignment('right').setOpacity(uiBlock.opacity).setPosition(uiNavigation.buttons.inventory.x, uiNavigation.buttons.inventory.y).write('inventory')
 }
