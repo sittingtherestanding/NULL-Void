@@ -3,6 +3,8 @@ var game = new Lorina()
 		.setColor('#003366')
 		.setRoomSize(320, 568)
 		.setDomSize(320, 568)
+		// .setRoomSize(400, 600)
+		// .setDomSize(400, 600)
 		.setDomPosition(window.innerWidth / 2 - l.dom.width / 2, window.innerHeight / 2 - l.dom.height / 2)
 
 var tool = new Tool() 
@@ -19,7 +21,7 @@ var green = '#ccffcc'
 var uiPadding = 12
 
 var uiNavigation = {
-	fontSize: 12,
+	fontSize: Math.round(l.room.width / 25),
 	position: {
 		x: uiPadding,
 		y: l.room.height - uiPadding * 5
@@ -34,11 +36,11 @@ var uiNavigation = {
 		y: uiNavigation.position.y + uiNavigation.buttons.padding * 2
 	}
 	uiNavigation.buttons.conditions = {
-		x: 113,
+		x: l.room.width / 8 * 2.8,
 		y: uiNavigation.position.y + uiNavigation.buttons.padding * 2
 	}
 	uiNavigation.buttons.drones = {
-		x: 194,
+		x: l.room.width / 8 * 4.8,
 		y: uiNavigation.position.y + uiNavigation.buttons.padding * 2
 	}
 	uiNavigation.buttons.inventory = {
@@ -49,23 +51,25 @@ var uiNavigation = {
 var uiBlock = {
 	opacity: 0.75,
 	title: {
-		fontSize: 12,
+		fontSize: Math.round(l.room.width / 25),
 		padding: 5
 	},
 	content: {
-		fontSize: 20,
+		fontSize: Math.round(l.room.width / 17),
 		padding: 5
 	}
 }
+	
+	uiBlock.title.height = uiBlock.title.fontSize + uiBlock.title.padding
 
 	uiBlock.half = {
 		width: l.room.width / 2 - uiPadding * 3,
-		height: (uiNavigation.position.y - (uiPadding * 7) - ((uiBlock.title.fontSize + uiBlock.title.padding) * 4)) / 4
+		height: (uiNavigation.position.y - (uiPadding * 5) - ((uiBlock.title.height) * 4)) / 4
 	}
 
 	uiBlock.full = {
 		width: l.room.width - uiPadding * 2,
-		height: (uiNavigation.position.y - (uiPadding * 7) - ((uiBlock.title.fontSize + uiBlock.title.padding) * 4)) / 4
+		height: (uiNavigation.position.y - (uiPadding * 5) - ((uiBlock.title.height) * 4)) / 4
 	}
 
 var screens = new Object()
@@ -73,7 +77,7 @@ var screens = new Object()
 	// Vitals ui values
 	screens.vitals = new Object()
 
-	screens.vitals.skeleton = {x: uiPadding * 2 + uiBlock.half.width / 2, y: uiPadding + uiBlock.title.fontSize + uiBlock.title.padding}
+	screens.vitals.skeleton = {x: uiPadding * 2 + uiBlock.half.width / 2, y: uiPadding + uiBlock.title.height}
 
 	var vitalsSkeleton = new Entity()
 		vitalsSkeleton.setSprite('images/screens/vitals/skeleton.png')
@@ -91,7 +95,7 @@ var screens = new Object()
 
 	screens.vitals.bloodPressure = {
 		x: l.room.width - uiPadding - uiBlock.half.width,
-		y: uiPadding + uiBlock.title.fontSize + uiBlock.title.padding + uiPadding + uiBlock.half.height,
+		y: uiPadding + uiBlock.title.height + uiPadding + uiBlock.half.height,
 		width: uiBlock.half.width,
 		height: uiBlock.half.height,
 		color: green
@@ -99,7 +103,7 @@ var screens = new Object()
 
 	screens.vitals.heartRate = {
 		x: uiPadding,
-		y: uiPadding * 3 + (uiBlock.title.fontSize + uiBlock.title.padding) * 2 + uiBlock.half.height * 2,
+		y: uiPadding * 3 + (uiBlock.title.height) * 2 + uiBlock.half.height * 2,
 		width: uiBlock.full.width,
 		height: uiBlock.full.height,
 		color: green
@@ -107,7 +111,7 @@ var screens = new Object()
 
 	screens.vitals.respiratoryRate = {
 		x: uiPadding,
-		y: uiPadding * 4 + (uiBlock.title.fontSize + uiBlock.title.padding) * 3 + uiBlock.half.height * 2 + uiBlock.full.height,
+		y: uiPadding * 4 + (uiBlock.title.height) * 3 + uiBlock.half.height * 2 + uiBlock.full.height,
 		width: uiBlock.full.width,
 		height: uiBlock.full.height,
 		color: green
@@ -142,18 +146,22 @@ var main = function()
 	drawBlock('temperature', player.temperature + ' F', screens.vitals.bodyTemperature)
 
 	// Blood pressure
-	drawBlock('blood pressure', player.bloodPressure.top + '/' + player.bloodPressure.bottom + ' mm hg', screens.vitals.bloodPressure)
+	drawBlock('blood pressure', '', screens.vitals.bloodPressure)
+	typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 3 + screens.vitals.bloodPressure.height / 18).write(player.bloodPressure.top)
+	pencil.setColor(game.color).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 16, screens.vitals.bloodPressure.y + uiBlock.title.height + screens.vitals.bloodPressure.height / 2.35 + screens.vitals.bloodPressure.height / 18).setSize(screens.vitals.bloodPressure.width / 3.5, 2).fillRectangle()
+	typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 3 * 2 + screens.vitals.bloodPressure.height / 18).write(player.bloodPressure.bottom)
+	typewriter.setAlignment('left').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(screens.vitals.bloodPressure.x + screens.vitals.bloodPressure.width / 5 * 2, screens.vitals.bloodPressure.y + screens.vitals.bloodPressure.height / 2 + screens.vitals.bloodPressure.height / 18).write('mm hg')
 
 	// Heart rate
 	drawBlock('heart rate', '', screens.vitals.heartRate)
-	cardiogram.draw(screens.vitals.heartRate.x, screens.vitals.heartRate.y + uiBlock.title.fontSize + uiBlock.title.padding, screens.vitals.heartRate.width, screens.vitals.heartRate.height)
+	cardiogram.draw(screens.vitals.heartRate.x, screens.vitals.heartRate.y + uiBlock.title.height, screens.vitals.heartRate.width, screens.vitals.heartRate.height)
 
 	// Respiratory rate
 	drawBlock('respiratory rate', '', screens.vitals.respiratoryRate)
-	capnometer.draw(screens.vitals.respiratoryRate.x, screens.vitals.respiratoryRate.y + uiBlock.title.fontSize + uiBlock.title.padding, screens.vitals.respiratoryRate.width, screens.vitals.respiratoryRate.height)
+	capnometer.draw(screens.vitals.respiratoryRate.x, screens.vitals.respiratoryRate.y + uiBlock.title.height, screens.vitals.respiratoryRate.width, screens.vitals.respiratoryRate.height)
 
 	// Navigation
-	pencil.setColor(green).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 3).fillRectangle()
+	pencil.setColor(green).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 2).fillRectangle()
 	typewriter.setColor(green).setSize(uiNavigation.fontSize)
 	typewriter.setAlignment('left').setPosition(uiNavigation.buttons.vitals.x, uiNavigation.buttons.vitals.y).write('vitals')
 	typewriter.setAlignment('center').setPosition(uiNavigation.buttons.conditions.x, uiNavigation.buttons.conditions.y).write('conditions')
@@ -167,7 +175,7 @@ game.start(main)
 
 var drawBlock = function(title, content, block)
 {
-	pencil.setOpacity(block.opacity).setColor(block.color).setPosition(block.x, block.y + uiBlock.title.fontSize + uiBlock.title.padding).setSize(block.width, block.height).fillRectangle()
+	pencil.setOpacity(block.opacity).setColor(block.color).setPosition(block.x, block.y + uiBlock.title.height).setSize(block.width, block.height).fillRectangle()
 	typewriter.setAlignment('left').setOpacity(block.opacity).setColor(block.color).setSize(uiBlock.title.fontSize).setPosition(block.x, block.y).write(title)
-	typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(block.x + block.width / 2, block.y + block.height / 2).write(content)
+	typewriter.setAlignment('center').setColor(game.color).setSize(uiBlock.content.fontSize).setPosition(block.x + block.width / 2, block.y + block.height / 2 + block.height / 18).write(content)
 }

@@ -6,13 +6,13 @@ this.Capnometer = function()
 
 	this.draw = function(x, y, width, height)
 	{
-		this.period = Math.round(1000 / player.breathing.rate * 2)
-		this.amplitude = Math.round(height / 2 * (1 - this.padding) * player.breathing.deepness)
+		this.period = 1000 / player.breathing.rate * 2
+		this.amplitude = height / 2 * (1 - this.padding) * player.breathing.deepness
 
 		this.y = -this.amplitude * Math.sin(this.counter)
 		this.counter += Math.PI / this.period
 
-		this.history.push(Math.round(this.y))
+		this.history.push(this.y)
 
 		this.currentX = 0
 
@@ -35,8 +35,8 @@ this.Capnometer = function()
 			for (var i = 0; i < this.history.length; i++)
 			{
 				l.ctx.beginPath()
-				l.ctx.moveTo(x + this.currentX - 1, Math.round(y + height / 2) + this.history[i - 1])
-				l.ctx.lineTo(x + this.currentX, Math.round(y + height / 2) + this.history[i])
+				l.ctx.moveTo(x + this.currentX - 1, y + height / 2 + this.history[i - 1])
+				l.ctx.lineTo(x + this.currentX, y + height / 2 + this.history[i])
 				l.ctx.lineWidth = 2
 				l.ctx.strokeStyle = game.color
 				l.ctx.stroke()
