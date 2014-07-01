@@ -12,7 +12,7 @@ var mouse = new Mouse()
 
 var pencil = new Pencil()
 var typewriter = new Typewriter()
-	typewriter.setFont('Furore')
+	typewriter.setFont('furoreregular')
 
 var screens = new Object()
 
