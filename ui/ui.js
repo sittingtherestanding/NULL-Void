@@ -47,6 +47,11 @@ var uiBlock = {
     
     uiBlock.title.height = uiBlock.title.fontSize + uiBlock.title.padding
 
+    uiBlock.tiny = {
+        width: l.room.width / 2 - uiPadding * 1.5,
+        height: ((uiNavigation.position.y - (uiPadding * 5) - ((uiBlock.title.height) * 4)) / 4) / 2
+    }
+
     uiBlock.half = {
         width: l.room.width / 2 - uiPadding * 3,
         height: (uiNavigation.position.y - (uiPadding * 5) - ((uiBlock.title.height) * 4)) / 4

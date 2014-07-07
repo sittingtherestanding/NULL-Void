@@ -3,8 +3,11 @@ var game = new Lorina()
 		.setColor('#003366')
 		.setRoomSize(320, 568)
 		.setDomSize(320, 568)
-		// .setRoomSize(400, 600)
-		// .setDomSize(400, 600)
+		// For testing purposes
+		/*
+		.setRoomSize(400, 600)
+		.setDomSize(400, 600)
+		*/
 		.setDomPosition(window.innerWidth / 2 - l.dom.width / 2, window.innerHeight / 2 - l.dom.height / 2)
 
 var tool = new Tool() 
@@ -12,16 +15,19 @@ var mouse = new Mouse()
 
 var pencil = new Pencil()
 var typewriter = new Typewriter()
-	typewriter.setFont('furoreregular')
+	typewriter.setFont('Furore') // Change to furoreregular to load from the web
 
 var screens = new Object()
 
 var player = new Player()
+var conditions = new Conditions()
 
-var deathIncrease = 0.05
+// var deathIncrease = 0.05
 
 var main = function()
 {
+	// Vitals screen
+	/*
 	if (player.alive && player.heart.rate > 0 && player.heart.rate < 198)
 	{
 		player.temperature.value += deathIncrease / 8
@@ -81,6 +87,13 @@ var main = function()
 
 	drawVitals()
 	drawNavigation()
+
+	game.draw()
+	*/
+
+	game.blank()
+
+	drawConditions()
 
 	game.draw()
 }
