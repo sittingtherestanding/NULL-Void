@@ -33,26 +33,8 @@ screens.conditions.wind = {
     color: green
 }
 
-var conditionsSun = new Entity()
-    conditionsSun.setSprite('images/screens/conditions/sun.png')
-                 .setPosition(uiPadding, uiNavigation.position.y)
-                 .setSize(25, 25)
-                 .setAnchor(12, 12)
-
 var drawConditions = function()
 {
-    if (conditions.time.value < 100)
-    {
-        conditions.time.value += 0.01
-    }
-    else
-    {
-        conditions.time.value = 0
-    }
-
-    // Reposition the sun to show time
-    conditionsSun.x = uiPadding + (l.room.width - uiPadding * 2) / 100 * conditions.time.value
-
     map.draw()
 
     // Draw a border around the map
@@ -70,6 +52,4 @@ var drawConditions = function()
 	drawBlock('wind', conditions.wind.value + ' mph', screens.conditions.wind)
 
     drawNavigation()
-
-    conditionsSun.draw()
 }

@@ -114,7 +114,7 @@ var main = function()
 	}
 	else if (currentScreen == 'conditions')
 	{
-		if (mouse.leftClick)
+		if (mouse.leftClick && mouse.x > uiPadding && mouse.x < l.room.width - uiPadding && mouse.y > uiPadding && mouse.y < screens.conditions.temperature.y - uiPadding * 2)
 		{
 			if (mousePreviousX && mousePreviousY)
 			{

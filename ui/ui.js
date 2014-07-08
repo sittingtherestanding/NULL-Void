@@ -62,6 +62,12 @@ var uiBlock = {
         height: (uiNavigation.position.y - (uiPadding * 5) - ((uiBlock.title.height) * 4)) / 4
     }
 
+var timeSun = new Entity()
+    timeSun.setSprite('images/screens/conditions/sun.png')
+           .setPosition(uiPadding, uiNavigation.position.y)
+           .setSize(25, 25)
+           .setAnchor(12, 12)
+
 var drawBlock = function(title, content, block, subtitle)
 {
     pencil.setOpacity(uiBlock.opacity).setColor(block.color).setPosition(block.x, block.y + uiBlock.title.height).setSize(block.width, block.height).fillRectangle()
@@ -78,6 +84,20 @@ var drawNavigation = function()
 {
     pencil.setOpacity(uiBlock.opacity).setColor(green).setPosition(uiPadding, uiNavigation.position.y).setSize(l.room.width - uiPadding * 2, 2).fillRectangle()
     
+    if (conditions.time.value < 100)
+    {
+        conditions.time.value += 0.01
+    }
+    else
+    {
+        conditions.time.value = 0
+    }
+
+    // Reposition the sun to show time
+    timeSun.x = uiPadding + (l.room.width - uiPadding * 2) / 100 * conditions.time.value
+
+    timeSun.draw()
+
     typewriter.setSize(uiNavigation.fontSize)
 
     if (player.temperature.warning || player.bloodPressure.warning || player.heart.warning || player.breathing.warning)
