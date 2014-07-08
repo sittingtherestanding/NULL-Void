@@ -41,8 +41,6 @@ var conditionsSun = new Entity()
 
 var drawConditions = function()
 {
-    map.draw()
-
     if (conditions.time.value < 100)
     {
         conditions.time.value += 0.01
@@ -54,6 +52,17 @@ var drawConditions = function()
 
     // Reposition the sun to show time
     conditionsSun.x = uiPadding + (l.room.width - uiPadding * 2) / 100 * conditions.time.value
+
+    map.draw()
+
+    // Draw a border around the map
+    pencil.setOpacity(uiBlock.opacity).setPosition(uiPadding, uiPadding).setColor(green).setStroke(2).setSize(l.dom.width - uiPadding * 2, screens.conditions.temperature.y - uiPadding * 2).strokeRectangle()
+
+    // Block out map drawing that overflows the alloted space
+    pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, uiPadding).fillRectangle()
+    pencil.setPosition(0, 0).setColor(game.color).setSize(uiPadding, l.dom.height).fillRectangle()
+    pencil.setPosition(l.dom.width - uiPadding, 0).setColor(game.color).setSize(uiPadding, l.dom.height).fillRectangle()
+    pencil.setPosition(0, screens.conditions.temperature.y - uiPadding).setColor(game.color).setSize(l.dom.width, l.dom.height - screens.conditions.temperature.y + uiPadding).fillRectangle()
 
 	drawBlock('temperature', conditions.temperature.value, screens.conditions.temperature)
 	drawBlock('c02 levels', conditions.carbon.value + ' ppmv', screens.conditions.carbon)

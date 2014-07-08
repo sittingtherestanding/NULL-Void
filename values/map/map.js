@@ -6,11 +6,11 @@ var Map = function()
 	this.width = l.room.height * 2
 	this.height = l.room.height * 2
 
-	this.gridSpacing = 20
+	this.gridSpacing = 18
 
 	this.camera = {
-		x: 0,
-		y: 0
+		x: -uiPadding,
+		y: -uiPadding
 	}
 
 	this.viewport = {

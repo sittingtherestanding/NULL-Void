@@ -103,18 +103,18 @@ var main = function()
 			map.camera.x -= mouse.x - mousePreviousX
 			map.camera.y -= mouse.y - mousePreviousY
 
-			if (map.camera.x < 0)
+			if (map.camera.x < -uiPadding)
 			{
-				map.camera.x = 0
+				map.camera.x = -uiPadding
 			}
 			else if (map.camera.x > map.width - l.dom.width)
 			{
 				map.camera.x = map.width - l.dom.width
 			}
 			
-			if (map.camera.y < 0)
+			if (map.camera.y < -uiPadding)
 			{
-				map.camera.y = 0
+				map.camera.y = -uiPadding
 			}
 			else if (map.camera.y > map.height - l.dom.height)
 			{
