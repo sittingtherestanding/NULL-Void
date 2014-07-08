@@ -41,6 +41,8 @@ var conditionsSun = new Entity()
 
 var drawConditions = function()
 {
+    map.draw()
+
     if (conditions.time.value < 100)
     {
         conditions.time.value += 0.01

@@ -22,6 +22,11 @@ var screens = new Object()
 var player = new Player()
 var conditions = new Conditions()
 
+var map = new Map()
+
+var mousePreviousX = undefined
+var mousePreviousY = undefined
+
 // var deathIncrease = 0.05
 
 var main = function()
@@ -90,6 +95,41 @@ var main = function()
 
 	game.draw()
 	*/
+
+	if (mouse.leftClick)
+	{
+		if (mousePreviousX && mousePreviousY)
+		{
+			map.camera.x -= mouse.x - mousePreviousX
+			map.camera.y -= mouse.y - mousePreviousY
+
+			if (map.camera.x < 0)
+			{
+				map.camera.x = 0
+			}
+			else if (map.camera.x > map.width - l.dom.width)
+			{
+				map.camera.x = map.width - l.dom.width
+			}
+			
+			if (map.camera.y < 0)
+			{
+				map.camera.y = 0
+			}
+			else if (map.camera.y > map.height - l.dom.height)
+			{
+				map.camera.y = map.height - l.dom.height
+			}
+		}
+
+		mousePreviousX = mouse.x
+		mousePreviousY = mouse.y
+	}
+	else
+	{
+		mousePreviousX = undefined
+		mousePreviousY = undefined
+	}
 
 	game.blank()
 
