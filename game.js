@@ -19,6 +19,10 @@ var typewriter = new Typewriter()
 
 var screens = new Object()
 
+var currentScreen = 'vitals'
+var navigationDividerOne = l.room.width / 8 * 1.75
+var navigationDividerTwo = l.room.width / 8 * 4
+
 var player = new Player()
 var conditions = new Conditions()
 
@@ -27,115 +31,130 @@ var map = new Map()
 var mousePreviousX = undefined
 var mousePreviousY = undefined
 
-// var deathIncrease = 0.05
-
 var main = function()
 {
-	// Vitals screen
-	/*
-	if (player.alive && player.heart.rate > 0 && player.heart.rate < 198)
+	// Watch for clicks on navigation buttons
+	if (mouse.leftClick && mouse.y > uiNavigation.position.y)
 	{
-		player.temperature.value += deathIncrease / 8
-
-		player.heart.rate += deathIncrease
-		player.breathing.rate += deathIncrease
-
-		player.bloodPressure.bottom += deathIncrease
-		player.bloodPressure.top = player.bloodPressure.bottom * 1.5
-
-		// Warnings
-		if (player.temperature.value >= 100.4)
+		if (mouse.x > uiPadding && mouse.x < navigationDividerOne)
 		{
-			player.temperature.warning = true
-			screens.vitals.bodyTemperature.color = red
+			currentScreen = 'vitals'
 		}
-
-		if (player.bloodPressure.bottom >= 100)
+		else if (mouse.x > navigationDividerOne && mouse.x < navigationDividerTwo)
 		{
-			player.bloodPressure.warning = true
-			screens.vitals.bloodPressure.color = red
-		}
-
-		if (player.heart.rate >= 100)
-		{
-			player.heart.warning = true
-			screens.vitals.heartRate.color = red
-		}
-
-		if (player.breathing.rate >= 50)
-		{
-			player.breathing.warning = true
-			screens.vitals.respiratoryRate.color = red
-		}
-
-		// Causes of death
-		if (player.temperature.value >= 112)
-		{
-			player.death()
-		}
-
-		if (player.bloodPressure.bottom >= 110)
-		{
-			player.death()
-		}
-	}
-	else
-	{
-		// Cool the body
-		if (player.temperature.value > 0)
-		{
-			player.temperature.value -= deathIncrease / 10
+			currentScreen = 'conditions'
 		}
 	}
 
-	game.blank()
-
-	drawVitals()
-	drawNavigation()
-
-	game.draw()
-	*/
-
-	if (mouse.leftClick)
+	if (currentScreen == 'vitals')
 	{
-		if (mousePreviousX && mousePreviousY)
-		{
-			map.camera.x -= mouse.x - mousePreviousX
-			map.camera.y -= mouse.y - mousePreviousY
+		var deathIncrease = 0.05
 
-			if (map.camera.x < -uiPadding)
+		if (player.alive && player.heart.rate > 0 && player.heart.rate < 198)
+		{
+			player.temperature.value += deathIncrease / 8
+
+			player.heart.rate += deathIncrease
+			player.breathing.rate += deathIncrease
+
+			player.bloodPressure.bottom += deathIncrease
+			player.bloodPressure.top = player.bloodPressure.bottom * 1.5
+
+			// Warnings
+			if (player.temperature.value >= 100.4)
 			{
-				map.camera.x = -uiPadding
+				player.temperature.warning = true
+				screens.vitals.bodyTemperature.color = red
 			}
-			else if (map.camera.x > map.width - l.dom.width)
+
+			if (player.bloodPressure.bottom >= 100)
 			{
-				map.camera.x = map.width - l.dom.width
+				player.bloodPressure.warning = true
+				screens.vitals.bloodPressure.color = red
 			}
-			
-			if (map.camera.y < -uiPadding)
+
+			if (player.heart.rate >= 100)
 			{
-				map.camera.y = -uiPadding
+				player.heart.warning = true
+				screens.vitals.heartRate.color = red
 			}
-			else if (map.camera.y > map.height - l.dom.height)
+
+			if (player.breathing.rate >= 50)
 			{
-				map.camera.y = map.height - l.dom.height
+				player.breathing.warning = true
+				screens.vitals.respiratoryRate.color = red
+			}
+
+			// Causes of death
+			if (player.temperature.value >= 112)
+			{
+				player.death()
+			}
+
+			if (player.bloodPressure.bottom >= 110)
+			{
+				player.death()
+			}
+		}
+		else
+		{
+			// Cool the body
+			if (player.temperature.value > 0)
+			{
+				player.temperature.value -= deathIncrease / 10
 			}
 		}
 
-		mousePreviousX = mouse.x
-		mousePreviousY = mouse.y
+		game.blank()
+
+		drawVitals()
+		drawNavigation()
+
+		game.draw()
 	}
-	else
+	else if (currentScreen == 'conditions')
 	{
-		mousePreviousX = undefined
-		mousePreviousY = undefined
+		if (mouse.leftClick)
+		{
+			if (mousePreviousX && mousePreviousY)
+			{
+				map.camera.x -= mouse.x - mousePreviousX
+				map.camera.y -= mouse.y - mousePreviousY
+
+				if (map.camera.x < -uiPadding)
+				{
+					map.camera.x = -uiPadding
+				}
+				else if (map.camera.x > map.width - l.dom.width)
+				{
+					map.camera.x = map.width - l.dom.width
+				}
+				
+				if (map.camera.y < -uiPadding)
+				{
+					map.camera.y = -uiPadding
+				}
+				else if (map.camera.y > map.height - l.dom.height)
+				{
+					map.camera.y = map.height - l.dom.height
+				}
+			}
+
+			mousePreviousX = mouse.x
+			mousePreviousY = mouse.y
+		}
+		else
+		{
+			mousePreviousX = undefined
+			mousePreviousY = undefined
+		}
+
+		game.blank()
+
+		drawConditions()
+
+		game.draw()
 	}
-
-	game.blank()
-
-	drawConditions()
-
-	game.draw()
 }
 
 game.start(main)
