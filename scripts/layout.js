@@ -4,8 +4,7 @@ this.Layout = function()
 
     this.pencil = new Pencil()
     this.typewriter = new Typewriter()
-
-    this.environment = new Environment()
+    this.typewriter.setFont('Furore') // Change to furoreregular to load from the web
 
     // UI values
     this.padding = 12
@@ -18,22 +17,22 @@ this.Layout = function()
 
         this.navigation.vitals = {
             x: this.padding,
-            y: this.navigation.y + this.navigation.padding * 2
+            y: this.navigation.y + this.padding * 2
         }
 
         this.navigation.conditions = {
             x: l.room.width / 8 * 2.8,
-            y: this.navigation.y + this.navigation.padding * 2
+            y: this.navigation.y + this.padding * 2
         }
 
         this.navigation.drones = {
             x: l.room.width / 8 * 4.8,
-            y: this.navigation.y + this.navigation.padding * 2
+            y: this.navigation.y + this.padding * 2
         }
 
         this.navigation.inventory = {
             x: l.room.width - this.padding,
-            y: this.navigation.y + this.navigation.padding * 2
+            y: this.navigation.y + this.padding * 2
         }
 
     this.block = {
@@ -73,6 +72,7 @@ this.Layout = function()
 
     this.block.draw = function(title, content, block, subtitle)
     {
+        console.log(self.block.y)
         self.pencil.setOpacity(self.block.opacity).setColor(self.block.color).setPosition(self.block.x, self.block.y + self.block.title.height).setSize(self.block.width, self.block.height).fillRectangle()
         self.typewriter.setAlignment('left').setOpacity(self.block.opacity).setColor(self.block.color).setSize(self.block.title.fontSize).setPosition(self.block.x, self.block.y).write(title)
         self.typewriter.setAlignment('center').setColor(game.color).setSize(self.block.content.fontSize).setPosition(self.block.x + self.block.width / 2, self.block.y + self.block.height / 2 + self.block.height / 18).write(content)
@@ -89,17 +89,17 @@ this.Layout = function()
     {
         self.pencil.setOpacity(self.block.opacity).setColor(green).setPosition(self.padding, self.navigation.y).setSize(l.room.width - self.padding * 2, 2).fillRectangle()
         
-        if (self.environment.time.value < 100)
+        if (daylight < 100)
         {
-            self.environment.time.value += 0.01
+            daylight += 0.01
         }
         else
         {
-            self.environment.time.value = 0
+            daylight = 0
         }
 
         // Reposition the sun to show time
-        self.sun.x = self.padding + (l.room.width - self.padding * 2) / 100 * self.environment.time.value
+        self.sun.x = self.padding * 1.5 + (l.room.width - self.padding * 3) / 100 * daylight
 
         self.sun.draw()
 

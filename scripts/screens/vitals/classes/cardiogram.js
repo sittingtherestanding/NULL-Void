@@ -1,5 +1,7 @@
 var Cardiogram = function()
 {
+    var self = this
+
     this.pencil = new Pencil()
 
     this.padding = 0.3
@@ -11,48 +13,50 @@ var Cardiogram = function()
 
     this.draw = function(x, y, width, height)
     {
-        this.y = Math.round(y + height / 2)
-        this.heightMod = height / 2 * (1 - this.padding)
+        self.y = Math.round(y + height / 2)
+        self.heightMod = height / 2 * (1 - self.padding)
 
-        this.present = new Date()
+        self.present = new Date()
 
-        if (this.present.getTime() - this.past.getTime() > 1000 * 60 / player.heart.rate)
+        if (self.present.getTime() - self.past.getTime() > 1000 * 60 / player.heart.rate)
         {
-            this.beatIndex = 1 // Start the beat
+            self.beatIndex = 1 // Start the beat
 
-            this.past = new Date()
+            self.past = new Date()
         }
 
-        if (this.beatIndex > 0 && this.beatIndex < this.beat.length - 1)
+        if (self.beatIndex > 0 && self.beatIndex < self.beat.length - 1)
         {
-            this.beatIndex++
+            self.beatIndex++
         }
         else
         {
-            this.beatIndex = 0 // Stop the beat
+            self.beatIndex = 0 // Stop the beat
         }
 
-        this.history.push(Math.round(this.beat[this.beatIndex] * this.heightMod))
+        self.history.push(Math.round(self.beat[self.beatIndex] * self.heightMod))
 
-        this.currentX = 0
+        self.currentX = 0
 
-        if (this.history.length >= width)
+        if (self.history.length >= width)
         {
-            for (var i = this.history.length - width; i < this.history.length; i++)
+            for (var i = self.history.length - width; i < self.history.length; i++)
             {
-                this.pencil.setColor(game.color).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
+                self.pencil.setColor(game.color).setStroke(2).setPosition(x + self.currentX - 1, self.y + self.history[i - 1]).setEndPosition(x + self.currentX, self.y + self.history[i]).strokeLine()
 
-                this.currentX++
+                self.currentX++
             }
         }
         else
         {
-            for (var i = 0; i < this.history.length; i++)
+            for (var i = 0; i < self.history.length; i++)
             {
-                this.pencil.setColor(game.color).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
+                self.pencil.setColor(game.color).setStroke(2).setPosition(x + self.currentX - 1, self.y + self.history[i - 1]).setEndPosition(x + self.currentX, self.y + self.history[i]).strokeLine()
 
-                this.currentX++
+                self.currentX++
             }
         }
+
+        return self
     }
 }

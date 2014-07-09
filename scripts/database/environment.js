@@ -19,8 +19,4 @@ var Environment = function()
 		warning: false,
 		value: 22
 	}
-
-	this.time = {
-		value: 0
-	}
 }

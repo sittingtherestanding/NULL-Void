@@ -1,5 +1,7 @@
 var Capnometer = function()
 {
+	var self = this
+
 	this.pencil = new Pencil()
 
 	this.history = new Array()
@@ -8,33 +10,35 @@ var Capnometer = function()
 
 	this.draw = function(x, y, width, height)
 	{
-		this.period = 1000 / player.breathing.rate * 2
-		this.amplitude = height / 2 * (1 - this.padding) * player.breathing.deepness
+		self.period = 1000 / player.breathing.rate * 2
+		self.amplitude = height / 2 * (1 - self.padding) * player.breathing.deepness
 
-		this.y = -this.amplitude * Math.sin(this.counter)
-		this.counter += Math.PI / this.period
+		self.y = -self.amplitude * Math.sin(self.counter)
+		self.counter += Math.PI / self.period
 
-		this.history.push(this.y)
+		self.history.push(self.y)
 
-		this.currentX = 0
+		self.currentX = 0
 
-		if (this.history.length >= width)
+		if (self.history.length >= width)
 		{
-			for (var i = this.history.length - width; i < this.history.length; i++)
+			for (var i = self.history.length - width; i < self.history.length; i++)
 			{
-				this.pencil.setStroke(2).setColor(game.color).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
+				self.pencil.setStroke(2).setColor(game.color).setPosition(x + self.currentX - 1, y + height / 2 + self.history[i - 1]).setEndPosition(x + self.currentX, y + height / 2 + self.history[i]).strokeLine()
 
-				this.currentX++
+				self.currentX++
 			}
 		}
 		else
 		{
-			for (var i = 0; i < this.history.length; i++)
+			for (var i = 0; i < self.history.length; i++)
 			{
-				this.pencil.setStroke(2).setColor(game.color).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
+				self.pencil.setStroke(2).setColor(game.color).setPosition(x + self.currentX - 1, y + height / 2 + self.history[i - 1]).setEndPosition(x + self.currentX, y + height / 2 + self.history[i]).strokeLine()
 
-				this.currentX++
+				self.currentX++
 			}
 		}
+
+		return self
 	}
 }

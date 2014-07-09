@@ -1,6 +1,6 @@
 var game = new Lorina()
 	game.setTitle('NULL Void')
-		.setColor('#003366')
+		.setColor(blue)
 		.setRoomSize(320, 568)
 		.setDomSize(320, 568)
 

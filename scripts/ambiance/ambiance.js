@@ -1,27 +1,31 @@
 this.Ambiance = function()
 {
-	this.spacing = 2
+    var self = this
 
+    this.pencil = new Pencil()
+
+	this.spacing = 4
+    this.opacity = 0.1
 	this.offset = 0
 	this.speed = 0.25
 
-	this.pencil = new Pencil()
-
     this.scanlines = function()
     {
-    	if (offset < spacing)
+    	if (self.offset < self.spacing)
     	{
-    		offset += speed
+    		self.offset += self.speed
     	}
     	else
     	{
-    		offset = 0
+    		self.offset = 0
     	}
 
-    	this.i = Math.round(l.room.height / spacing)
-    	while (i--)
+    	self.i = Math.floor(l.room.height / self.spacing)
+    	while (self.i--)
     	{
-    		pencil.setColor(green).setOpacity(0.15).setPosition(0, i * spacing + Math.round(offset)).setEndPosition(l.room.width, i * spacing + Math.round(offset)).setStroke(1).strokeLine()
+    		self.pencil.setColor(green).setOpacity(this.opacity).setPosition(0, self.i * self.spacing + Math.round(self.offset)).setEndPosition(l.room.width, self.i * self.spacing + Math.round(self.offset)).setStroke(1).strokeLine()
     	}
+
+        return self
     }
 }
