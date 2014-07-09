@@ -3,29 +3,23 @@ var game = new Lorina()
 		.setColor('#003366')
 		.setRoomSize(320, 568)
 		.setDomSize(320, 568)
-		// For testing purposes
-		/*
-		.setRoomSize(400, 600)
-		.setDomSize(400, 600)
-		*/
 
 var mouse = new Mouse()
 
-var typewriter = new Typewriter()
-	typewriter.setFont('Furore') // Change to furoreregular to load from the web
+var environment = new Environment()
+var map = new Map()
+var player = new Player()
+
+var layout = new Layout()
 
 var ambiance = new Ambiance()
 
-var screens = new Object()
+var vitals = new Vitals()
+var conditions = new Conditions()
 
 var currentScreen = 'vitals'
 var navigationDividerOne = l.room.width / 8 * 1.75
 var navigationDividerTwo = l.room.width / 8 * 4
-
-var player = new Player()
-var conditions = new Conditions()
-
-var map = new Map()
 
 var mousePreviousX = undefined
 var mousePreviousY = undefined
@@ -63,25 +57,25 @@ var main = function()
 			if (player.temperature.value >= 100.4)
 			{
 				player.temperature.warning = true
-				screens.vitals.bodyTemperature.color = red
+				vitals.bodyTemperature.color = red
 			}
 
 			if (player.bloodPressure.bottom >= 100)
 			{
 				player.bloodPressure.warning = true
-				screens.vitals.bloodPressure.color = red
+				vitals.bloodPressure.color = red
 			}
 
 			if (player.heart.rate >= 100)
 			{
 				player.heart.warning = true
-				screens.vitals.heartRate.color = red
+				vitals.heartRate.color = red
 			}
 
 			if (player.breathing.rate >= 50)
 			{
 				player.breathing.warning = true
-				screens.vitals.respiratoryRate.color = red
+				vitals.respiratoryRate.color = red
 			}
 
 			// Causes of death
@@ -95,19 +89,11 @@ var main = function()
 				player.death()
 			}
 		}
-		else
-		{
-			// Cool the body
-			if (player.temperature.value > 0)
-			{
-				player.temperature.value -= deathIncrease / 10
-			}
-		}
 
 		game.blank()
 
-		drawVitals()
-		drawNavigation()
+		vitals.draw(player)
+		layout.navigation.draw()
 
 		ambiance.scanlines()
 
@@ -115,7 +101,7 @@ var main = function()
 	}
 	else if (currentScreen == 'conditions')
 	{
-		if (mouse.leftClick && mouse.x > uiPadding && mouse.x < l.room.width - uiPadding && mouse.y > uiPadding && mouse.y < screens.conditions.temperature.y - uiPadding * 2)
+		if (mouse.leftClick && mouse.x > uiPadding && mouse.x < l.room.width - uiPadding && mouse.y > uiPadding && mouse.y < conditions.temperature.y - uiPadding * 2)
 		{
 			if (mousePreviousX && mousePreviousY)
 			{

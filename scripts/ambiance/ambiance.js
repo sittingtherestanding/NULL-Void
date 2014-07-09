@@ -1,11 +1,11 @@
-var Ambiance = function()
+this.Ambiance = function()
 {
-	var spacing = 2
+	this.spacing = 2
 
-	var offset = 0
-	var speed = 0.25
+	this.offset = 0
+	this.speed = 0.25
 
-	var pencil = new Pencil()
+	this.pencil = new Pencil()
 
     this.scanlines = function()
     {
@@ -18,7 +18,7 @@ var Ambiance = function()
     		offset = 0
     	}
 
-    	var i = l.room.height / spacing
+    	this.i = Math.round(l.room.height / spacing)
     	while (i--)
     	{
     		pencil.setColor(green).setOpacity(0.15).setPosition(0, i * spacing + Math.round(offset)).setEndPosition(l.room.width, i * spacing + Math.round(offset)).setStroke(1).strokeLine()

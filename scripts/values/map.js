@@ -1,7 +1,7 @@
-var uiPadding = 12
-
 var Map = function()
 {
+	this.layout = new Layout()
+
 	// Make the map square for development purposes
 	this.width = l.room.height * 2
 	this.height = l.room.height * 2
@@ -9,8 +9,8 @@ var Map = function()
 	this.gridSpacing = 18
 
 	this.camera = {
-		x: -uiPadding,
-		y: -uiPadding
+		x: -this.layout.padding,
+		y: -this.layout.padding
 	}
 
 	this.player = new Entity()
@@ -39,13 +39,17 @@ var Map = function()
 		}
 
 		this.calculateDraw(this.player)
+
+		return this
 	}
 
 	this.calculateDraw = function(entity)
 	{
-		entity.x = entity.location.x - this.camera.x + uiPadding
-		entity.y = entity.location.y - this.camera.y + uiPadding
+		entity.x = entity.location.x - this.camera.x + this.layout.padding
+		entity.y = entity.location.y - this.camera.y + this.layout.padding
 
 		entity.draw()
+
+		return this
 	}
 }

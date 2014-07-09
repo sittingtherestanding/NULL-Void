@@ -1,4 +1,4 @@
-var Conditions = function()
+var Environment = function()
 {
 	this.temperature = {
 		warning: false,
