@@ -4,7 +4,7 @@ var Player = function()
 
 	this.temperature = {
 		warning: false,
-		reading: 98.6
+		value: 98.6
 	}
 
 	this.bloodPressure = {

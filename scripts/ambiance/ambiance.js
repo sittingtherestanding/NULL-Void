@@ -9,7 +9,8 @@ this.Ambiance = function()
 	this.offset = 0
 	this.speed = 0.25
 
-    this.scanlines = function()
+    this.scanlines = new Object()
+    this.scanlines.draw = function() // Use 'draw' to keep with the syntax of everything else
     {
     	if (self.offset < self.spacing)
     	{
@@ -23,7 +24,7 @@ this.Ambiance = function()
     	self.i = Math.floor(l.room.height / self.spacing)
     	while (self.i--)
     	{
-    		self.pencil.setColor(green).setOpacity(this.opacity).setPosition(0, self.i * self.spacing + Math.round(self.offset)).setEndPosition(l.room.width, self.i * self.spacing + Math.round(self.offset)).setStroke(1).strokeLine()
+    		self.pencil.setColor(green).setOpacity(self.opacity).setPosition(0, self.i * self.spacing + Math.round(self.offset)).setEndPosition(l.room.width, self.i * self.spacing + Math.round(self.offset)).setStroke(1).strokeLine()
     	}
 
         return self

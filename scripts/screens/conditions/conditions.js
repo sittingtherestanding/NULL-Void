@@ -1,5 +1,9 @@
 var Conditions = function()
 {
+    var self = this
+
+    this.pencil = new Pencil()
+
     this.layout = new Layout()
 
     this.temperature = {
@@ -39,19 +43,17 @@ var Conditions = function()
         map.draw()
 
         // Draw a border around the map
-        pencil.setOpacity(this.layout.block.opacity).setPosition(this.layout.padding, this.layout.padding).setColor(green).setStroke(2).setSize(l.dom.width - this.layout.padding * 2, this.temperature.y - this.layout.padding * 2).strokeRectangle()
+        self.pencil.setOpacity(self.layout.block.opacity).setPosition(self.layout.padding, self.layout.padding).setColor(green).setStroke(2).setSize(l.dom.width - self.layout.padding * 2, self.temperature.y - self.layout.padding * 2).strokeRectangle()
 
         // Block out map drawing that overflows the alloted space
-        pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, this.layout.padding).fillRectangle()
-        pencil.setPosition(0, 0).setColor(game.color).setSize(this.layout.padding, l.dom.height).fillRectangle()
-        pencil.setPosition(l.dom.width - this.layout.padding, 0).setColor(game.color).setSize(this.layout.padding, l.dom.height).fillRectangle()
-        pencil.setPosition(0, this.temperature.y - this.layout.padding).setColor(game.color).setSize(l.dom.width, l.dom.height - this.temperature.y + this.layout.padding).fillRectangle()
+        self.pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, self.layout.padding).fillRectangle()
+        self.pencil.setPosition(0, 0).setColor(game.color).setSize(self.layout.padding, l.dom.height).fillRectangle()
+        self.pencil.setPosition(l.dom.width - self.layout.padding, 0).setColor(game.color).setSize(self.layout.padding, l.dom.height).fillRectangle()
+        self.pencil.setPosition(0, self.temperature.y - self.layout.padding).setColor(game.color).setSize(l.dom.width, l.dom.height - self.temperature.y + self.layout.padding).fillRectangle()
 
-        this.layout.block.draw('temperature', this.temperature.value, this.temperature)
-        this.layout.block.draw('c02 levels', this.carbon.value + ' ppmv', this.carbon)
-        this.layout.block.draw('radiation', this.radiation.value + ' msc', this.radiation)
-        this.layout.block.draw('wind', this.wind.value + ' mph', this.wind)
-
-        drawNavigation()
+        self.layout.block.draw('temperature', self.temperature.value, self.temperature)
+        self.layout.block.draw('c02 levels', self.carbon.value + ' ppmv', self.carbon)
+        self.layout.block.draw('radiation', self.radiation.value + ' msc', self.radiation)
+        self.layout.block.draw('wind', self.wind.value + ' mph', self.wind)
     }
 }

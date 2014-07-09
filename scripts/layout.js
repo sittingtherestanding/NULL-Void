@@ -72,14 +72,13 @@ this.Layout = function()
 
     this.block.draw = function(title, content, block, subtitle)
     {
-        console.log(self.block.y)
-        self.pencil.setOpacity(self.block.opacity).setColor(self.block.color).setPosition(self.block.x, self.block.y + self.block.title.height).setSize(self.block.width, self.block.height).fillRectangle()
-        self.typewriter.setAlignment('left').setOpacity(self.block.opacity).setColor(self.block.color).setSize(self.block.title.fontSize).setPosition(self.block.x, self.block.y).write(title)
-        self.typewriter.setAlignment('center').setColor(game.color).setSize(self.block.content.fontSize).setPosition(self.block.x + self.block.width / 2, self.block.y + self.block.height / 2 + self.block.height / 18).write(content)
+        self.pencil.setOpacity(block.opacity).setColor(block.color).setPosition(block.x, block.y + self.block.title.height).setSize(block.width, block.height).fillRectangle()
+        self.typewriter.setAlignment('left').setOpacity(block.opacity).setColor(block.color).setSize(self.block.title.fontSize).setPosition(block.x, block.y).write(title)
+        self.typewriter.setAlignment('center').setColor(game.color).setSize(self.block.content.fontSize).setPosition(block.x + block.width / 2, block.y + block.height / 2 + block.height / 18).write(content)
 
         if (subtitle)
         {
-            self.typewriter.setAlignment('right').setOpacity(self.block.opacity).setColor(self.block.color).setSize(self.block.title.fontSize * 0.75).setPosition(self.block.x + self.block.width, self.block.y + self.block.title.fontSize * 0.25).write(subtitle)
+            self.typewriter.setAlignment('right').setOpacity(block.opacity).setColor(block.color).setSize(self.block.title.fontSize * 0.75).setPosition(block.x + block.width, block.y + self.block.title.fontSize * 0.25).write(subtitle)
         }
 
         return self
