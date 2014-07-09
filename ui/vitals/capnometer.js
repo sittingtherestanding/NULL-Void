@@ -1,5 +1,7 @@
-this.Capnometer = function()
+var Capnometer = function()
 {
+	this.pencil = new Pencil()
+
 	this.history = new Array()
 	this.counter = 0
 	this.padding = 0.3
@@ -20,12 +22,7 @@ this.Capnometer = function()
 		{
 			for (var i = this.history.length - width; i < this.history.length; i++)
 			{
-				l.ctx.beginPath()
-				l.ctx.moveTo(x + this.currentX - 1, y + height / 2 + this.history[i - 1])
-				l.ctx.lineTo(x + this.currentX, y + height / 2 + this.history[i])
-				l.ctx.lineWidth = 2
-				l.ctx.strokeStyle = game.color
-				l.ctx.stroke()
+				this.pencil.setStroke(2).setColor(game.color).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
 
 				this.currentX++
 			}
@@ -34,12 +31,7 @@ this.Capnometer = function()
 		{
 			for (var i = 0; i < this.history.length; i++)
 			{
-				l.ctx.beginPath()
-				l.ctx.moveTo(x + this.currentX - 1, y + height / 2 + this.history[i - 1])
-				l.ctx.lineTo(x + this.currentX, y + height / 2 + this.history[i])
-				l.ctx.lineWidth = 2
-				l.ctx.strokeStyle = game.color
-				l.ctx.stroke()
+				this.pencil.setStroke(2).setColor(game.color).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
 
 				this.currentX++
 			}

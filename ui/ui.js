@@ -1,3 +1,5 @@
+var pencil = new Pencil()
+
 // UI colors
 var green = '#ccffcc'
 var red = '#ff6666'

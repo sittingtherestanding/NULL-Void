@@ -8,14 +8,13 @@ var game = new Lorina()
 		.setRoomSize(400, 600)
 		.setDomSize(400, 600)
 		*/
-		.setDomPosition(window.innerWidth / 2 - l.dom.width / 2, window.innerHeight / 2 - l.dom.height / 2)
 
-var tool = new Tool() 
 var mouse = new Mouse()
 
-var pencil = new Pencil()
 var typewriter = new Typewriter()
 	typewriter.setFont('Furore') // Change to furoreregular to load from the web
+
+var ambiance = new Ambiance()
 
 var screens = new Object()
 
@@ -109,6 +108,8 @@ var main = function()
 
 		drawVitals()
 		drawNavigation()
+
+		ambiance.scanlines()
 
 		game.draw()
 	}

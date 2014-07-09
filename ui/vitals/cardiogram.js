@@ -1,5 +1,7 @@
-this.Cardiogram = function()
+var Cardiogram = function()
 {
+    this.pencil = new Pencil()
+
     this.padding = 0.3
     this.beatIndex = 0
     this.currentX = 0
@@ -38,12 +40,7 @@ this.Cardiogram = function()
         {
             for (var i = this.history.length - width; i < this.history.length; i++)
             {
-                l.ctx.beginPath()
-                l.ctx.moveTo(x + this.currentX - 1, this.y + this.history[i - 1])
-                l.ctx.lineTo(x + this.currentX, this.y + this.history[i])
-                l.ctx.lineWidth = 2
-                l.ctx.strokeStyle = game.color
-                l.ctx.stroke()
+                this.pencil.setColor(game.color).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
 
                 this.currentX++
             }
@@ -52,12 +49,7 @@ this.Cardiogram = function()
         {
             for (var i = 0; i < this.history.length; i++)
             {
-                l.ctx.beginPath()
-                l.ctx.moveTo(x + this.currentX - 1, this.y + this.history[i - 1])
-                l.ctx.lineTo(x + this.currentX, this.y + this.history[i])
-                l.ctx.lineWidth = 2
-                l.ctx.strokeStyle = game.color
-                l.ctx.stroke()
+                this.pencil.setColor(game.color).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
 
                 this.currentX++
             }
