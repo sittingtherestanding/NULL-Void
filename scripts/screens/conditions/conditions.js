@@ -49,9 +49,9 @@ var Conditions = function()
         this.pencil.setPosition(l.dom.width - this.layout.padding, 0).setColor(game.color).setSize(this.layout.padding, l.dom.height).fillRectangle()
         this.pencil.setPosition(0, this.temperature.y - this.layout.padding).setColor(game.color).setSize(l.dom.width, l.dom.height - this.temperature.y + this.layout.padding).fillRectangle()
 
-        this.layout.block.draw('temperature', this.temperature.value, this.temperature)
-        this.layout.block.draw('c02 levels', this.carbon.value + ' ppmv', this.carbon)
-        this.layout.block.draw('radiation', this.radiation.value + ' msc', this.radiation)
-        this.layout.block.draw('wind', this.wind.value + ' mph', this.wind)
+        this.layout.block.draw('temperature', environment.temperature.value, this.temperature)
+        this.layout.block.draw('c02 levels', environment.carbon.value + ' ppmv', this.carbon)
+        this.layout.block.draw('radiation', environment.radiation.value + ' msc', this.radiation)
+        this.layout.block.draw('wind', environment.wind.value + ' mph', this.wind)
     }
 }
