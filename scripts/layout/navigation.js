@@ -12,29 +12,31 @@ var Navigation = function()
 
 		this.vitals = {
 			x: padding,
-			y: this.y + padding * 1.75
+			y: this.y + padding * 1.65
 		}
 
 		this.conditions = {
 			x: l.room.width / 8 * 2.8,
-			y: this.y + padding * 1.75
+			y: this.y + padding * 1.65
 		}
 
 		this.drones = {
 			x: l.room.width / 8 * 4.8,
-			y: this.y + padding * 1.75
+			y: this.y + padding * 1.65
 		}
 
 		this.inventory = {
 			x: l.room.width - padding,
-			y: this.y + padding * 1.75
+			y: this.y + padding * 1.65
 		}
 
+	/*
 	this.sun = new Entity()
 	this.sun.setSprite('images/screens/conditions/sun.png')
 				.setPosition(padding, this.y)
 				.setSize(25, 25)
 				.setAnchor(12, 12)
+	*/
 
 	this.draw = function()
 	{
@@ -60,7 +62,7 @@ var Navigation = function()
 
 		if (player.temperature.warning || player.bloodPressure.warning || player.heart.warning || player.breathing.warning)
 		{
-			this.typewriter.setColor(colorError)
+			this.typewriter.setColor(colorWarning)
 		}
 		else
 		{

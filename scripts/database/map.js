@@ -1,6 +1,11 @@
 var Map = function()
 {
 	this.pencil = new Pencil()
+	this.typewriter = new Typewriter()
+	this.typewriter.setFont('bioliquid')
+
+	this.titleSpacing = 20
+	this.titleSize = l.room.width / 25
 
 	// Make the map square for development purposes
 	this.width = l.room.height * 2
@@ -13,19 +18,22 @@ var Map = function()
 		y: -padding
 	}
 
-	this.player = new Entity()
-	this.player.setSprite('images/screens/conditions/marker.png')
-			   .setSize(25, 25)
-			   .setAnchor(12, 12)
+	this.enemy = new Entity()
+	this.enemy.setSprite('images/screens/conditions/enemy_marker.png')
+			   .setSize(30, 30)
+			   .setAnchor(15, 15)
 			   .location = {
 			   		x: 15,
 			   		y: 15
 			   }
 
-	this.place = function(entity)
+	this.place = function(entity, title, content)
 	{
 		entity.x = entity.location.x - this.camera.x + padding
 		entity.y = entity.location.y - this.camera.y + padding
+
+		this.typewriter.setColor(colorThree).setSize(this.titleSize).setPosition(entity.x + this.titleSpacing, entity.y + 1 - this.titleSize).write(title + ':')
+		this.typewriter.setColor(colorWarning).setSize(this.titleSize).setPosition(entity.x + this.titleSpacing, entity.y + 1).write(content)
 
 		entity.draw()
 
@@ -53,9 +61,11 @@ var Map = function()
 
 	this.draw = function()
 	{
-		this.place(this.player)
+		this.enemy.rotate(-0.75)
 
 		this.grid()
+
+		this.place(this.enemy, 'signal', 'unknown')
 
 		return this
 	}

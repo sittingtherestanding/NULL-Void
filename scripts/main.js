@@ -53,25 +53,25 @@ var main = function()
 			if (player.temperature.value >= 100.4)
 			{
 				player.temperature.warning = true
-				vitals.bodyTemperature.color = colorError
+				vitals.bodyTemperature.color = colorWarning
 			}
 
 			if (player.bloodPressure.bottom >= 100)
 			{
 				player.bloodPressure.warning = true
-				vitals.bloodPressure.color = colorError
+				vitals.bloodPressure.color = colorWarning
 			}
 
 			if (player.heart.rate >= 100)
 			{
 				player.heart.warning = true
-				vitals.heartRate.color = colorError
+				vitals.heartRate.color = colorWarning
 			}
 
 			if (player.breathing.rate >= 50)
 			{
 				player.breathing.warning = true
-				vitals.respiratoryRate.color = colorError
+				vitals.respiratoryRate.color = colorWarning
 			}
 
 			// Causes of death

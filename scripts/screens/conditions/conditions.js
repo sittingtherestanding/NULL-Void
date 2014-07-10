@@ -45,9 +45,6 @@ var Conditions = function()
     {
         map.draw()
 
-        // Draw a border around the map
-        this.pencil.setPosition(padding, padding).setColor(colorFour).setStroke(2).setSize(l.dom.width - padding * 2, this.temperature.y - padding * 2).strokeRectangle()
-
         // Block out map drawing that overflows the alloted space
         this.pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, padding).fillRectangle()
         this.pencil.setPosition(0, 0).setColor(game.color).setSize(padding, l.dom.height).fillRectangle()
@@ -58,5 +55,8 @@ var Conditions = function()
         this.blocks.draw('c02 levels', environment.carbon.value + ' ppmv', this.carbon)
         this.blocks.draw('radiation', environment.radiation.value + ' msc', this.radiation)
         this.blocks.draw('wind', environment.wind.value + ' mph', this.wind)
+
+        // Draw a border around the map
+        this.pencil.setPosition(padding, padding).setColor(colorThree).setStroke(2).setSize(l.dom.width - padding * 2, this.temperature.y - padding * 2).strokeRectangle()
     }
 }
