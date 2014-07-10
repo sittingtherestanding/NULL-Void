@@ -1,7 +1,5 @@
 this.Vitals = function()
 {
-	var self = this
-
 	this.pencil = new Pencil()
 	this.typewriter = new Typewriter()
 	this.typewriter.setFont('Furore') // Change to furoreregular to load from the web
@@ -52,26 +50,26 @@ this.Vitals = function()
 	this.draw = function(player)
 	{
 		// Skeleton
-		self.skeleton.draw()
+		this.skeleton.draw()
 
 		// Body temperature
-		self.layout.block.draw('temperature', Math.round(player.temperature.value * 10) / 10 + ' F', self.bodyTemperature)
+		this.layout.block.draw('temperature', Math.round(player.temperature.value * 10) / 10 + ' F', this.bodyTemperature)
 
 		// Blood pressure
-		self.layout.block.draw('blood pressure', '', self.bloodPressure)
-		self.typewriter.setAlignment('center').setColor(game.color).setSize(self.layout.block.content.fontSize).setPosition(self.bloodPressure.x + self.bloodPressure.width / 5, self.bloodPressure.y + self.bloodPressure.height / 3 + self.bloodPressure.height / 18).write(Math.round(player.bloodPressure.top))
-		self.pencil.setColor(game.color).setPosition(self.bloodPressure.x + self.bloodPressure.width / 16, self.bloodPressure.y + self.layout.block.title.height + self.bloodPressure.height / 2.35 + self.bloodPressure.height / 18).setSize(self.bloodPressure.width / 3.5, 2).fillRectangle()
-		self.typewriter.setAlignment('center').setColor(game.color).setSize(self.layout.block.content.fontSize).setPosition(self.bloodPressure.x + self.bloodPressure.width / 5, self.bloodPressure.y + self.bloodPressure.height / 3 * 2 + self.bloodPressure.height / 18).write(Math.round(player.bloodPressure.bottom))
-		self.typewriter.setAlignment('left').setColor(game.color).setSize(self.layout.block.content.fontSize).setPosition(self.bloodPressure.x + self.bloodPressure.width / 5 * 2, self.bloodPressure.y + self.bloodPressure.height / 2 + self.bloodPressure.height / 18).write('mm hg')
+		this.layout.block.draw('blood pressure', '', this.bloodPressure)
+		this.typewriter.setAlignment('center').setColor(game.color).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5, this.bloodPressure.y + this.bloodPressure.height / 3 + this.bloodPressure.height / 18).write(Math.round(player.bloodPressure.top))
+		this.pencil.setColor(game.color).setPosition(this.bloodPressure.x + this.bloodPressure.width / 16, this.bloodPressure.y + this.layout.block.title.height + this.bloodPressure.height / 2.35 + this.bloodPressure.height / 18).setSize(this.bloodPressure.width / 3.5, 2).fillRectangle()
+		this.typewriter.setAlignment('center').setColor(game.color).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5, this.bloodPressure.y + this.bloodPressure.height / 3 * 2 + this.bloodPressure.height / 18).write(Math.round(player.bloodPressure.bottom))
+		this.typewriter.setAlignment('left').setColor(game.color).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5 * 2, this.bloodPressure.y + this.bloodPressure.height / 2 + this.bloodPressure.height / 18).write('mm hg')
 
 		// Heart rate
-		self.layout.block.draw('heart rate', '', self.heartRate, Math.round(player.heart.rate) + ' beats per minute')
-		self.cardiogram.draw(self.heartRate.x, self.heartRate.y + self.layout.block.title.height, self.heartRate.width, self.heartRate.height)
+		this.layout.block.draw('heart rate', '', this.heartRate, Math.round(player.heart.rate) + ' beats per minute')
+		this.cardiogram.draw(this.heartRate.x, this.heartRate.y + this.layout.block.title.height, this.heartRate.width, this.heartRate.height)
 
 		// Respiratory rate
-		self.layout.block.draw('respiratory rate', '', self.respiratoryRate, Math.round(player.breathing.rate) + ' breaths per minute')
-		self.capnometer.draw(self.respiratoryRate.x, self.respiratoryRate.y + self.layout.block.title.height, self.respiratoryRate.width, self.respiratoryRate.height)
+		this.layout.block.draw('respiratory rate', '', this.respiratoryRate, Math.round(player.breathing.rate) + ' breaths per minute')
+		this.capnometer.draw(this.respiratoryRate.x, this.respiratoryRate.y + this.layout.block.title.height, this.respiratoryRate.width, this.respiratoryRate.height)
 
-		return self
+		return this
 	}
 }
