@@ -33,6 +33,8 @@ var main = function()
 		}
 	}
 
+	game.blank()
+
 	if (currentScreen == 'vitals')
 	{
 		var deathIncrease = 0.05 // For testing
@@ -51,25 +53,25 @@ var main = function()
 			if (player.temperature.value >= 100.4)
 			{
 				player.temperature.warning = true
-				vitals.bodyTemperature.color = orange
+				vitals.bodyTemperature.color = colorError
 			}
 
 			if (player.bloodPressure.bottom >= 100)
 			{
 				player.bloodPressure.warning = true
-				vitals.bloodPressure.color = orange
+				vitals.bloodPressure.color = colorError
 			}
 
 			if (player.heart.rate >= 100)
 			{
 				player.heart.warning = true
-				vitals.heartRate.color = orange
+				vitals.heartRate.color = colorError
 			}
 
 			if (player.breathing.rate >= 50)
 			{
 				player.breathing.warning = true
-				vitals.respiratoryRate.color = orange
+				vitals.respiratoryRate.color = colorError
 			}
 
 			// Causes of death
@@ -84,14 +86,7 @@ var main = function()
 			}
 		}
 
-		game.blank()
-
 		vitals.draw()
-		navigation.draw()
-
-		ambiance.scanlines.draw()
-
-		game.draw()
 	}
 	else if (currentScreen == 'conditions')
 	{
@@ -130,15 +125,13 @@ var main = function()
 			mousePreviousY = undefined
 		}
 
-		game.blank()
-
 		conditions.draw()
-		navigation.draw()
-
-		ambiance.scanlines.draw()
-
-		game.draw()
 	}
+
+	navigation.draw()
+	ambiance.scanlines.draw()
+
+	game.draw()
 }
 
 game.start(main)

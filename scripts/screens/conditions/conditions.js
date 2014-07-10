@@ -10,7 +10,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height) * 2,
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
-        color: tan
+        color: colorThree
     }
 
     this.carbon = {
@@ -18,7 +18,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height),
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
-        color: tan
+        color: colorThree
     }
 
     this.radiation = {
@@ -26,7 +26,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height) * 2,
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
-        color: tan
+        color: colorThree
     }
 
     this.wind = {
@@ -34,7 +34,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height),
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
-        color: tan
+        color: colorThree
     }
 
     this.draw = function()
@@ -42,7 +42,7 @@ var Conditions = function()
         map.draw()
 
         // Draw a border around the map
-        this.pencil.setOpacity(this.blocks.opacity).setPosition(padding, padding).setColor(gray).setStroke(2).setSize(l.dom.width - padding * 2, this.temperature.y - padding * 2).strokeRectangle()
+        this.pencil.setPosition(padding, padding).setColor(colorFour).setStroke(2).setSize(l.dom.width - padding * 2, this.temperature.y - padding * 2).strokeRectangle()
 
         // Block out map drawing that overflows the alloted space
         this.pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, padding).fillRectangle()

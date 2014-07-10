@@ -1,7 +1,5 @@
 var Navigation = function()
 {
-	var self = this
-
 	this.pencil = new Pencil()
 	this.typewriter = new Typewriter()
 	this.typewriter.setFont('Furore') // Change to furoreregular to load from the web
@@ -40,7 +38,7 @@ var Navigation = function()
 
 	this.draw = function()
 	{
-		self.pencil.setOpacity(self.blocks.opacity).setColor(gray).setPosition(padding, bottom).setSize(l.room.width - padding * 2, 2).fillRectangle()
+		this.pencil.setColor(colorFour).setPosition(padding, bottom).setSize(l.room.width - padding * 2, 2).fillRectangle()
 		
 		/*
 		if (daylight < 100)
@@ -53,29 +51,29 @@ var Navigation = function()
 		}
 
 		// Reposition the sun to show time
-		self.sun.x = padding * 1.5 + (l.room.width - padding * 3) / 100 * daylight
+		this.sun.x = padding * 1.5 + (l.room.width - padding * 3) / 100 * daylight
 
-		self.sun.draw()
+		this.sun.draw()
 		*/
 
-		self.typewriter.setSize(self.fontSize)
+		this.typewriter.setSize(this.fontSize)
 
 		if (player.temperature.warning || player.bloodPressure.warning || player.heart.warning || player.breathing.warning)
 		{
-			self.typewriter.setColor(orange)
+			this.typewriter.setColor(colorError)
 		}
 		else
 		{
-			self.typewriter.setColor(tan)
+			this.typewriter.setColor(colorOne)
 		}
 
-		self.typewriter.setAlignment('left').setOpacity(self.blocks.opacity).setPosition(self.vitals.x, self.vitals.y).write('vitals')
+		this.typewriter.setAlignment('left').setPosition(this.vitals.x, this.vitals.y).write('vitals')
 
-		self.typewriter.setColor(tan)
-		self.typewriter.setAlignment('center').setOpacity(self.blocks.opacity).setPosition(self.conditions.x, self.conditions.y).write('conditions')
-		self.typewriter.setAlignment('center').setOpacity(self.blocks.opacity).setPosition(self.drones.x, self.drones.y).write('drones')
-		self.typewriter.setAlignment('right').setOpacity(self.blocks.opacity).setPosition(self.inventory.x, self.inventory.y).write('inventory')
+		this.typewriter.setColor(colorOne)
+		this.typewriter.setAlignment('center').setPosition(this.conditions.x, this.conditions.y).write('conditions')
+		this.typewriter.setAlignment('center').setPosition(this.drones.x, this.drones.y).write('drones')
+		this.typewriter.setAlignment('right').setPosition(this.inventory.x, this.inventory.y).write('inventory')
 		
-		return self
+		return this
 	}
 }

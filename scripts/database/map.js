@@ -22,33 +22,40 @@ var Map = function()
 			   		y: 15
 			   }
 
-	this.draw = function()
+	this.place = function(entity)
+	{
+		entity.x = entity.location.x - this.camera.x + padding
+		entity.y = entity.location.y - this.camera.y + padding
+
+		entity.draw()
+
+		return this
+	}
+
+	this.grid = function()
 	{
 		// Row pass
 		var i = Math.floor(this.width / this.gridSpacing)
 		while (i--)
 		{
-			this.pencil.setColor(gray).setOpacity(0.25).setStroke(1).setPosition(0, this.gridSpacing * i - this.camera.y).setEndPosition(l.dom.width, this.gridSpacing * i - this.camera.y).strokeLine()
+			this.pencil.setColor(colorFour).setStroke(1).setPosition(0, this.gridSpacing * i - this.camera.y).setEndPosition(l.dom.width, this.gridSpacing * i - this.camera.y).strokeLine()
 		}
 
 		// Column pass
 		var i = Math.floor(this.height / this.gridSpacing)
 		while (i--)
 		{
-			this.pencil.setColor(gray).setOpacity(0.25).setStroke(1).setPosition(this.gridSpacing * i - this.camera.x, 0).setEndPosition(this.gridSpacing * i - this.camera.x, l.dom.height).strokeLine()
+			this.pencil.setColor(colorFour).setStroke(1).setPosition(this.gridSpacing * i - this.camera.x, 0).setEndPosition(this.gridSpacing * i - this.camera.x, l.dom.height).strokeLine()
 		}
-
-		this.calculateDraw(this.player)
 
 		return this
 	}
 
-	this.calculateDraw = function(entity)
+	this.draw = function()
 	{
-		entity.x = entity.location.x - this.camera.x + padding
-		entity.y = entity.location.y - this.camera.y + padding
+		this.place(this.player)
 
-		entity.draw()
+		this.grid()
 
 		return this
 	}

@@ -1,12 +1,21 @@
+/*
 var black = '#2F343B'
 var gray = '#7E827A'
 var tan = '#E3CDA4'
 var orange = '#C77966'
 var red = '#703030'
+*/
+
+var colorOne = '#E1E6FA'
+var colorTwo = '#C4D7ED'
+var colorThree = '#ABC8E2'
+var colorFour = '#375D81'
+var colorFive = '#183152'
+var colorError = '#D8634C'
 
 var game = new Lorina()
 	game.setTitle('NULL Void')
-		.setColor(black)
+		.setColor(colorFive)
 		.setRoomSize(320, 568)
 		.setDomSize(320, 568)
 

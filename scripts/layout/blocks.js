@@ -1,12 +1,8 @@
 var Blocks = function()
 {
-    var self = this
-
     this.pencil = new Pencil()
     this.typewriter = new Typewriter()
     this.typewriter.setFont('Furore') // Change to furoreregular to load from the web
-
-    this.opacity = 0.85
 
     this.title = {
         fontSize: Math.round(l.room.width / 25),
@@ -37,15 +33,15 @@ var Blocks = function()
 
     this.draw = function(title, content, block, subtitle)
     {
-        self.pencil.setOpacity(self.opacity).setColor(block.color).setPosition(block.x, block.y + self.title.height).setSize(block.width, block.height).fillRectangle()
-        self.typewriter.setAlignment('left').setOpacity(1).setColor(gray).setSize(self.title.fontSize).setPosition(block.x, block.y).write(title)
-        self.typewriter.setAlignment('center').setColor(red).setSize(self.content.fontSize).setPosition(block.x + block.width / 2, block.y + block.height / 2 + block.height / 18).write(content)
+        this.pencil.setColor(block.color).setPosition(block.x, block.y + this.title.height).setSize(block.width, block.height).fillRectangle()
+        this.typewriter.setAlignment('left').setColor(colorFour).setSize(this.title.fontSize).setPosition(block.x, block.y).write(title)
+        this.typewriter.setAlignment('center').setColor(colorError).setSize(this.content.fontSize).setPosition(block.x + block.width / 2, block.y + block.height / 2 + block.height / 18).write(content)
 
         if (subtitle)
         {
-            self.typewriter.setAlignment('right').setOpacity(block.opacity).setColor(gray).setSize(self.title.fontSize * 0.75).setPosition(block.x + block.width, block.y + self.title.fontSize * 0.25).write(subtitle)
+            this.typewriter.setAlignment('right').setColor(colorFour).setSize(this.title.fontSize * 0.75).setPosition(block.x + block.width, block.y + this.title.fontSize * 0.25).write(subtitle)
         }
 
-        return self
+        return this
     }
 }

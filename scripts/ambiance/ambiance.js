@@ -1,32 +1,45 @@
 this.Ambiance = function()
 {
-    var self = this
+	var self = this
 
-    this.pencil = new Pencil()
+	this.pencil = new Pencil()
 
-	this.spacing = 4
-    this.opacity = 0.1
-	this.offset = 0
-	this.speed = 0.25
+	this.rounded = {
+		size: 15
+	}
 
-    this.scanlines = new Object()
-    this.scanlines.draw = function() // Use 'draw' to keep with the syntax of everything else
-    {
-    	if (self.offset < self.spacing)
-    	{
-    		self.offset += self.speed
-    	}
-    	else
-    	{
-    		self.offset = 0
-    	}
+	this.rounded.draw = function()
+	{
+		
+		
+		return this
+	}
 
-    	self.i = Math.floor(l.room.height / self.spacing)
-    	while (self.i--)
-    	{
-    		self.pencil.setColor(tan).setOpacity(self.opacity).setPosition(0, self.i * self.spacing + Math.round(self.offset)).setEndPosition(l.room.width, self.i * self.spacing + Math.round(self.offset)).setStroke(1).strokeLine()
-    	}
+	this.scanlines = {
+		position: 0
+	}
 
-        return self
-    }
+	this.scanlines.draw = function() // Use 'draw' to keep with the syntax of everything else
+	{
+		var gap = 4
+		var opacity = 0.1
+		var speed = 0.25
+		
+		if (self.scanlines.position < gap)
+		{
+			self.scanlines.position += speed
+		}
+		else
+		{
+			self.scanlines.position = 0
+		}
+
+		var i = Math.floor(l.room.height / gap)
+		while (i--)
+		{
+			self.pencil.setColor(colorOne).setOpacity(opacity).setPosition(0, i * gap + Math.round(self.scanlines.position)).setEndPosition(l.room.width, i * gap + Math.round(self.scanlines.position)).setStroke(1).strokeLine()
+		}
+
+		return self
+	}
 }
