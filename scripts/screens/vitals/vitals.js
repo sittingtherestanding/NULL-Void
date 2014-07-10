@@ -47,7 +47,7 @@ this.Vitals = function()
 	this.capnometer = new Capnometer()
 	this.cardiogram = new Cardiogram()
 
-	this.draw = function(player)
+	this.draw = function()
 	{
 		// Skeleton
 		this.skeleton.draw()

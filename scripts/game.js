@@ -6,14 +6,13 @@ var game = new Lorina()
 
 var mouse = new Mouse()
 
-var environment = new Environment()
 var map = new Map()
-var player = new Player()
 
 var layout = new Layout()
 
 var ambiance = new Ambiance()
 
+var medical = new Medical()
 var vitals = new Vitals()
 var conditions = new Conditions()
 
@@ -81,18 +80,18 @@ var main = function()
 			// Causes of death
 			if (player.temperature.value >= 112)
 			{
-				player.death()
+				medical.death()
 			}
 
 			if (player.bloodPressure.bottom >= 110)
 			{
-				player.death()
+				medical.death()
 			}
 		}
 
 		game.blank()
 
-		vitals.draw(player)
+		vitals.draw()
 		layout.navigation.draw()
 
 		ambiance.scanlines.draw()
