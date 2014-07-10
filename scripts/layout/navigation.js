@@ -9,15 +9,16 @@ var Navigation = function()
 	this.fontSize = Math.round(l.room.width / 20)
 	this.x = padding
 	this.y = bottom
-
-		this.vitals = {
+		this.conditions = {
 			x: padding,
-			y: this.y + padding * 1.65
+			y: this.y + padding * 1.65,
+			divider: l.room.width / 8 * 2.5
 		}
 
-		this.conditions = {
-			x: l.room.width / 8 * 2.8,
-			y: this.y + padding * 1.65
+		this.vitals = {
+			x: l.room.width / 8 * 3.15,
+			y: this.y + padding * 1.65,
+			divider: l.room.width / 8 * 4
 		}
 
 		this.drones = {
@@ -40,6 +41,19 @@ var Navigation = function()
 
 	this.draw = function()
 	{
+		// Watch for clicks on navigation buttons
+		if (mouse.leftClick && mouse.y > navigation.y)
+		{
+			if (mouse.x > padding && mouse.x < this.conditions.divider)
+			{
+				currentScreen = 'conditions'
+			}
+			else if (mouse.x > this.conditions.divider && mouse.x < this.vitals.divider)
+			{
+				currentScreen = 'vitals'
+			}
+		}
+
 		this.pencil.setColor(colorFour).setPosition(padding, bottom).setSize(l.room.width - padding * 2, 2).fillRectangle()
 		
 		/*
@@ -69,10 +83,10 @@ var Navigation = function()
 			this.typewriter.setColor(colorOne)
 		}
 
-		this.typewriter.setAlignment('left').setPosition(this.vitals.x, this.vitals.y).write('vitals')
+		this.typewriter.setAlignment('left').setPosition(this.conditions.x, this.conditions.y).write('conditions')
 
 		this.typewriter.setColor(colorOne)
-		this.typewriter.setAlignment('center').setPosition(this.conditions.x, this.conditions.y).write('conditions')
+		this.typewriter.setAlignment('center').setPosition(this.vitals.x, this.vitals.y).write('vitals')
 		this.typewriter.setAlignment('center').setPosition(this.drones.x, this.drones.y).write('drones')
 		this.typewriter.setAlignment('right').setPosition(this.inventory.x, this.inventory.y).write('inventory')
 	}

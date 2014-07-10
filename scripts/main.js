@@ -11,7 +11,7 @@ var medical = new Medical()
 var vitals = new Vitals()
 var conditions = new Conditions()
 
-var currentScreen = 'vitals'
+var currentScreen = 'conditions'
 var navigationDividerOne = l.room.width / 8 * 1.75
 var navigationDividerTwo = l.room.width / 8 * 4
 
@@ -20,24 +20,11 @@ var mousePreviousY = undefined
 
 var main = function()
 {
-	// Watch for clicks on navigation buttons
-	if (mouse.leftClick && mouse.y > navigation.y)
-	{
-		if (mouse.x > padding && mouse.x < navigationDividerOne)
-		{
-			currentScreen = 'vitals'
-		}
-		else if (mouse.x > navigationDividerOne && mouse.x < navigationDividerTwo)
-		{
-			currentScreen = 'conditions'
-		}
-	}
-
 	game.blank()
 
 	if (currentScreen == 'vitals')
 	{
-		var deathIncrease = 0.05 // For testing
+		var deathIncrease = 0 // For testing
 
 		if (player.alive && player.heart.rate > 0 && player.heart.rate < 198)
 		{

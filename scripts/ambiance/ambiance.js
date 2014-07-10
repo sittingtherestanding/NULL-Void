@@ -69,7 +69,7 @@ this.Ambiance = function()
 	}
 
 	this.scratched = new Entity()
-	this.scratched.setSprite('images/ambiance/scratches.png')
+	this.scratched.setSprite('images/ambiance/screen/scratches.png')
 				  .setPosition(0, 0)
 				  .setStretch(l.room.width, l.room.height)
 				  .setOpacity(0.15)
@@ -81,7 +81,7 @@ this.Ambiance = function()
 	}
 
 	this.ice = new Entity()
-	this.ice.setSprite('images/ambiance/ice.jpg')
+	this.ice.setSprite('images/ambiance/screen/ice.jpg')
 			.setStretch(l.room.width, l.room.height)
 			.setPosition(0, 0)
 			.setOpacity(0)
@@ -143,7 +143,7 @@ this.Ambiance = function()
 	}
 
 	this.sand = new Entity()
-	this.sand.setSprite('images/ambiance/sand/buildup.png')
+	this.sand.setSprite('images/ambiance/screen/buildup.png')
 			 .setStretch(l.room.width, l.room.height)
 			 .setPosition(0, 0)
 			 .setOpacity(0)
