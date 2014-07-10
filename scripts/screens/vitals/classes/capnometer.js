@@ -36,7 +36,5 @@ var Capnometer = function()
 				this.currentX++
 			}
 		}
-
-		return this
 	}
 }

@@ -132,6 +132,7 @@ var main = function()
 	ambiance.scanlines.draw()
 	ambiance.corners.draw()
 	ambiance.freezing.draw()
+	ambiance.snow.draw()
 
 	game.draw()
 }

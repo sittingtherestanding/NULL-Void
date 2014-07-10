@@ -75,7 +75,5 @@ var Navigation = function()
 		this.typewriter.setAlignment('center').setPosition(this.conditions.x, this.conditions.y).write('conditions')
 		this.typewriter.setAlignment('center').setPosition(this.drones.x, this.drones.y).write('drones')
 		this.typewriter.setAlignment('right').setPosition(this.inventory.x, this.inventory.y).write('inventory')
-		
-		return this
 	}
 }

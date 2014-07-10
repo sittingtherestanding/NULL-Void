@@ -54,7 +54,5 @@ var Cardiogram = function()
                 this.currentX++
             }
         }
-
-        return this
     }
 }

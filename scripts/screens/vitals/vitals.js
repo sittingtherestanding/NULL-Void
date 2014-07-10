@@ -73,7 +73,5 @@ this.Vitals = function()
 		// Respiratory rate
 		this.blocks.draw('respiratory rate', '', this.respiratoryRate, Math.round(player.breathing.rate) + ' breaths per minute')
 		this.capnometer.draw(this.respiratoryRate.x, this.respiratoryRate.y + this.blocks.title.height, this.respiratoryRate.width, this.respiratoryRate.height)
-
-		return this
 	}
 }

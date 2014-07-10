@@ -47,7 +47,5 @@ var Blocks = function()
         {
             this.typewriter.setAlignment('right').setColor(colorFour).setSize(this.title.fontSize * 0.75).setPosition(block.x + block.width, block.y + this.title.fontSize * 0.25).write(subtitle)
         }
-
-        return this
     }
 }

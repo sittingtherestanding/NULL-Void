@@ -36,8 +36,6 @@ var Map = function()
 		this.typewriter.setColor(colorWarning).setSize(this.titleSize).setPosition(entity.x + this.titleSpacing, entity.y + 1).write(content)
 
 		entity.draw()
-
-		return this
 	}
 
 	this.grid = function()
@@ -55,8 +53,6 @@ var Map = function()
 		{
 			this.pencil.setColor(colorFour).setStroke(1).setPosition(this.gridSpacing * i - this.camera.x, 0).setEndPosition(this.gridSpacing * i - this.camera.x, l.dom.height).strokeLine()
 		}
-
-		return this
 	}
 
 	this.draw = function()
@@ -66,7 +62,5 @@ var Map = function()
 		this.grid()
 
 		this.place(this.enemy, 'signal', 'unknown')
-
-		return this
 	}
 }
