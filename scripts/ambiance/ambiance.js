@@ -4,15 +4,43 @@ this.Ambiance = function()
 
 	this.pencil = new Pencil()
 
-	this.rounded = {
-		size: 15
+	this.corners = {
+		size: l.room.width / 40
 	}
 
-	this.rounded.draw = function()
+	this.corners.draw = function()
 	{
-		
-		
-		return this
+		l.ctx.fillStyle = '#000000'
+
+		// Northwest
+		l.ctx.beginPath()
+		l.ctx.moveTo(0, 0)
+		l.ctx.lineTo(self.corners.size, 0)
+		l.ctx.lineTo(0, self.corners.size)
+		l.ctx.fill()
+
+		// Northeast
+		l.ctx.beginPath()
+		l.ctx.moveTo(l.room.width, 0)
+		l.ctx.lineTo(l.room.width - self.corners.size, 0)
+		l.ctx.lineTo(l.room.width, self.corners.size)
+		l.ctx.fill()
+
+		// Southeast
+		l.ctx.beginPath()
+		l.ctx.moveTo(l.room.width, l.room.height)
+		l.ctx.lineTo(l.room.width - self.corners.size, l.room.height)
+		l.ctx.lineTo(l.room.width, l.room.height - self.corners.size)
+		l.ctx.fill()
+
+		// Southwest
+		l.ctx.beginPath()
+		l.ctx.moveTo(0, l.room.height)
+		l.ctx.lineTo(self.corners.size, l.room.height)
+		l.ctx.lineTo(0, l.room.height - self.corners.size)
+		l.ctx.fill()
+
+		return self
 	}
 
 	this.scanlines = {

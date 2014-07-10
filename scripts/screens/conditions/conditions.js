@@ -10,6 +10,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height) * 2,
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
+        middle: this.blocks.tiny.middle,
         color: colorThree
     }
 
@@ -18,6 +19,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height),
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
+        middle: this.blocks.tiny.middle,
         color: colorThree
     }
 
@@ -26,6 +28,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height) * 2,
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
+        middle: this.blocks.tiny.middle,
         color: colorThree
     }
 
@@ -34,6 +37,7 @@ var Conditions = function()
         y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height),
         width: this.blocks.tiny.width,
         height: this.blocks.tiny.height,
+        middle: this.blocks.tiny.middle,
         color: colorThree
     }
 

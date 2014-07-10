@@ -2,11 +2,11 @@ var Navigation = function()
 {
 	this.pencil = new Pencil()
 	this.typewriter = new Typewriter()
-	this.typewriter.setFont('Furore') // Change to furoreregular to load from the web
+	this.typewriter.setFont('bioliquid') // Change to furoreregular to load from the web
 
 	this.blocks = new Blocks()
 
-	this.fontSize = Math.round(l.room.width / 25)
+	this.fontSize = Math.round(l.room.width / 20)
 	this.x = padding
 	this.y = bottom
 

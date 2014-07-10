@@ -130,6 +130,7 @@ var main = function()
 
 	navigation.draw()
 	ambiance.scanlines.draw()
+	ambiance.corners.draw()
 
 	game.draw()
 }

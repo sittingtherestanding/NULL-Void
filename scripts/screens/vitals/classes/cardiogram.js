@@ -40,7 +40,7 @@ var Cardiogram = function()
         {
             for (var i = this.history.length - width; i < this.history.length; i++)
             {
-                this.pencil.setColor(colorError).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
+                this.pencil.setColor(colorOne).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
 
                 this.currentX++
             }
@@ -49,7 +49,7 @@ var Cardiogram = function()
         {
             for (var i = 0; i < this.history.length; i++)
             {
-                this.pencil.setColor(colorError).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
+                this.pencil.setColor(colorOne).setStroke(2).setPosition(x + this.currentX - 1, this.y + this.history[i - 1]).setEndPosition(x + this.currentX, this.y + this.history[i]).strokeLine()
 
                 this.currentX++
             }
