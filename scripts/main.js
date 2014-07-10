@@ -1,6 +1,7 @@
 var mouse = new Mouse()
 
-var map = new Map()
+var mousePreviousX = undefined
+var mousePreviousY = undefined
 
 var blocks = new Blocks()
 var navigation = new Navigation()
@@ -11,18 +12,54 @@ var medical = new Medical()
 var vitals = new Vitals()
 var conditions = new Conditions()
 
-var currentScreen = 'conditions'
-var navigationDividerOne = l.room.width / 8 * 1.75
-var navigationDividerTwo = l.room.width / 8 * 4
+var map = new Map()
 
-var mousePreviousX = undefined
-var mousePreviousY = undefined
+var currentScreen = 'conditions'
 
 var main = function()
 {
 	game.blank()
 
-	if (currentScreen == 'vitals')
+	if (currentScreen == 'conditions')
+	{
+		if (mouse.leftClick && mouse.x > padding && mouse.x < l.room.width - padding && mouse.y > padding && mouse.y < conditions.temperature.y - padding * 2)
+		{
+			if (mousePreviousX && mousePreviousY)
+			{
+				map.camera.x -= mouse.x - mousePreviousX
+				map.camera.y -= mouse.y - mousePreviousY
+
+				if (map.camera.x < -padding)
+				{
+					map.camera.x = -padding
+				}
+				else if (map.camera.x > map.width - l.dom.width)
+				{
+					map.camera.x = map.width - l.dom.width
+				}
+				
+				if (map.camera.y < -padding)
+				{
+					map.camera.y = -padding
+				}
+				else if (map.camera.y > map.height - l.dom.height)
+				{
+					map.camera.y = map.height - l.dom.height
+				}
+			}
+
+			mousePreviousX = mouse.x
+			mousePreviousY = mouse.y
+		}
+		else
+		{
+			mousePreviousX = undefined
+			mousePreviousY = undefined
+		}
+
+		conditions.draw()
+	}
+	else if (currentScreen == 'vitals')
 	{
 		var deathIncrease = 0 // For testing
 
@@ -74,45 +111,6 @@ var main = function()
 		}
 
 		vitals.draw()
-	}
-	else if (currentScreen == 'conditions')
-	{
-		if (mouse.leftClick && mouse.x > padding && mouse.x < l.room.width - padding && mouse.y > padding && mouse.y < conditions.temperature.y - padding * 2)
-		{
-			if (mousePreviousX && mousePreviousY)
-			{
-				map.camera.x -= mouse.x - mousePreviousX
-				map.camera.y -= mouse.y - mousePreviousY
-
-				if (map.camera.x < -padding)
-				{
-					map.camera.x = -padding
-				}
-				else if (map.camera.x > map.width - l.dom.width)
-				{
-					map.camera.x = map.width - l.dom.width
-				}
-				
-				if (map.camera.y < -padding)
-				{
-					map.camera.y = -padding
-				}
-				else if (map.camera.y > map.height - l.dom.height)
-				{
-					map.camera.y = map.height - l.dom.height
-				}
-			}
-
-			mousePreviousX = mouse.x
-			mousePreviousY = mouse.y
-		}
-		else
-		{
-			mousePreviousX = undefined
-			mousePreviousY = undefined
-		}
-
-		conditions.draw()
 	}
 
 	navigation.draw()
