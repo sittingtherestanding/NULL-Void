@@ -4,6 +4,15 @@ var tan = '#E3CDA4'
 var orange = '#C77966'
 var red = '#703030'
 
+var game = new Lorina()
+	game.setTitle('NULL Void')
+		.setColor(black)
+		.setRoomSize(320, 568)
+		.setDomSize(320, 568)
+
+var padding = 12
+var bottom = l.room.height - padding * 5
+
 var daylight = 0
 
 var player = {

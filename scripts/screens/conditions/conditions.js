@@ -2,37 +2,38 @@ var Conditions = function()
 {
     this.pencil = new Pencil()
 
-    this.layout = new Layout()
+    this.blocks = new Blocks()
+    this.navigation = new Navigation()
 
     this.temperature = {
-        x: this.layout.padding,
-        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height) * 2,
-        width: this.layout.block.tiny.width,
-        height: this.layout.block.tiny.height,
+        x: padding,
+        y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height) * 2,
+        width: this.blocks.tiny.width,
+        height: this.blocks.tiny.height,
         color: tan
     }
 
     this.carbon = {
-        x: this.layout.padding,
-        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height),
-        width: this.layout.block.tiny.width,
-        height: this.layout.block.tiny.height,
+        x: padding,
+        y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height),
+        width: this.blocks.tiny.width,
+        height: this.blocks.tiny.height,
         color: tan
     }
 
     this.radiation = {
-        x: l.room.width - this.layout.padding - this.layout.block.tiny.width,
-        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height) * 2,
-        width: this.layout.block.tiny.width,
-        height: this.layout.block.tiny.height,
+        x: l.room.width - padding - this.blocks.tiny.width,
+        y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height) * 2,
+        width: this.blocks.tiny.width,
+        height: this.blocks.tiny.height,
         color: tan
     }
 
     this.wind = {
-        x: l.room.width - this.layout.padding - this.layout.block.tiny.width,
-        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height),
-        width: this.layout.block.tiny.width,
-        height: this.layout.block.tiny.height,
+        x: l.room.width - padding - this.blocks.tiny.width,
+        y: this.navigation.y - (padding + this.blocks.tiny.height + this.blocks.title.height),
+        width: this.blocks.tiny.width,
+        height: this.blocks.tiny.height,
         color: tan
     }
 
@@ -41,17 +42,17 @@ var Conditions = function()
         map.draw()
 
         // Draw a border around the map
-        this.pencil.setOpacity(this.layout.block.opacity).setPosition(this.layout.padding, this.layout.padding).setColor(gray).setStroke(2).setSize(l.dom.width - this.layout.padding * 2, this.temperature.y - this.layout.padding * 2).strokeRectangle()
+        this.pencil.setOpacity(this.blocks.opacity).setPosition(padding, padding).setColor(gray).setStroke(2).setSize(l.dom.width - padding * 2, this.temperature.y - padding * 2).strokeRectangle()
 
         // Block out map drawing that overflows the alloted space
-        this.pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, this.layout.padding).fillRectangle()
-        this.pencil.setPosition(0, 0).setColor(game.color).setSize(this.layout.padding, l.dom.height).fillRectangle()
-        this.pencil.setPosition(l.dom.width - this.layout.padding, 0).setColor(game.color).setSize(this.layout.padding, l.dom.height).fillRectangle()
-        this.pencil.setPosition(0, this.temperature.y - this.layout.padding).setColor(game.color).setSize(l.dom.width, l.dom.height - this.temperature.y + this.layout.padding).fillRectangle()
+        this.pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, padding).fillRectangle()
+        this.pencil.setPosition(0, 0).setColor(game.color).setSize(padding, l.dom.height).fillRectangle()
+        this.pencil.setPosition(l.dom.width - padding, 0).setColor(game.color).setSize(padding, l.dom.height).fillRectangle()
+        this.pencil.setPosition(0, this.temperature.y - padding).setColor(game.color).setSize(l.dom.width, l.dom.height - this.temperature.y + padding).fillRectangle()
 
-        this.layout.block.draw('temperature', environment.temperature.value, this.temperature)
-        this.layout.block.draw('c02 levels', environment.carbon.value + ' ppmv', this.carbon)
-        this.layout.block.draw('radiation', environment.radiation.value + ' msc', this.radiation)
-        this.layout.block.draw('wind', environment.wind.value + ' mph', this.wind)
+        this.blocks.draw('temperature', environment.temperature.value, this.temperature)
+        this.blocks.draw('c02 levels', environment.carbon.value + ' ppmv', this.carbon)
+        this.blocks.draw('radiation', environment.radiation.value + ' msc', this.radiation)
+        this.blocks.draw('wind', environment.wind.value + ' mph', this.wind)
     }
 }

@@ -1,14 +1,9 @@
-var game = new Lorina()
-	game.setTitle('NULL Void')
-		.setColor(black)
-		.setRoomSize(320, 568)
-		.setDomSize(320, 568)
-
 var mouse = new Mouse()
 
 var map = new Map()
 
-var layout = new Layout()
+var blocks = new Blocks()
+var navigation = new Navigation()
 
 var ambiance = new Ambiance()
 
@@ -26,9 +21,9 @@ var mousePreviousY = undefined
 var main = function()
 {
 	// Watch for clicks on navigation buttons
-	if (mouse.leftClick && mouse.y > layout.navigation.y)
+	if (mouse.leftClick && mouse.y > navigation.y)
 	{
-		if (mouse.x > layout.padding && mouse.x < navigationDividerOne)
+		if (mouse.x > padding && mouse.x < navigationDividerOne)
 		{
 			currentScreen = 'vitals'
 		}
@@ -92,7 +87,7 @@ var main = function()
 		game.blank()
 
 		vitals.draw()
-		layout.navigation.draw()
+		navigation.draw()
 
 		ambiance.scanlines.draw()
 
@@ -100,25 +95,25 @@ var main = function()
 	}
 	else if (currentScreen == 'conditions')
 	{
-		if (mouse.leftClick && mouse.x > layout.padding && mouse.x < l.room.width - layout.padding && mouse.y > layout.padding && mouse.y < conditions.temperature.y - layout.padding * 2)
+		if (mouse.leftClick && mouse.x > padding && mouse.x < l.room.width - padding && mouse.y > padding && mouse.y < conditions.temperature.y - padding * 2)
 		{
 			if (mousePreviousX && mousePreviousY)
 			{
 				map.camera.x -= mouse.x - mousePreviousX
 				map.camera.y -= mouse.y - mousePreviousY
 
-				if (map.camera.x < -layout.padding)
+				if (map.camera.x < -padding)
 				{
-					map.camera.x = -layout.padding
+					map.camera.x = -padding
 				}
 				else if (map.camera.x > map.width - l.dom.width)
 				{
 					map.camera.x = map.width - l.dom.width
 				}
 				
-				if (map.camera.y < -layout.padding)
+				if (map.camera.y < -padding)
 				{
-					map.camera.y = -layout.padding
+					map.camera.y = -padding
 				}
 				else if (map.camera.y > map.height - l.dom.height)
 				{
@@ -138,7 +133,7 @@ var main = function()
 		game.blank()
 
 		conditions.draw()
-		layout.navigation.draw()
+		navigation.draw()
 
 		ambiance.scanlines.draw()
 

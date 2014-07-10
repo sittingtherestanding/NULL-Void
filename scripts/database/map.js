@@ -2,8 +2,6 @@ var Map = function()
 {
 	this.pencil = new Pencil()
 
-	this.layout = new Layout()
-
 	// Make the map square for development purposes
 	this.width = l.room.height * 2
 	this.height = l.room.height * 2
@@ -11,8 +9,8 @@ var Map = function()
 	this.gridSpacing = 18
 
 	this.camera = {
-		x: -this.layout.padding,
-		y: -this.layout.padding
+		x: -padding,
+		y: -padding
 	}
 
 	this.player = new Entity()
@@ -47,8 +45,8 @@ var Map = function()
 
 	this.calculateDraw = function(entity)
 	{
-		entity.x = entity.location.x - this.camera.x + this.layout.padding
-		entity.y = entity.location.y - this.camera.y + this.layout.padding
+		entity.x = entity.location.x - this.camera.x + padding
+		entity.y = entity.location.y - this.camera.y + padding
 
 		entity.draw()
 
