@@ -17,7 +17,7 @@ this.Vitals = function()
 		y: this.layout.padding,
 		width: this.layout.block.half.width,
 		height: this.layout.block.half.height,
-		color: green
+		color: tan
 	}
 
 	this.bloodPressure = {
@@ -25,7 +25,7 @@ this.Vitals = function()
 		y: this.layout.padding + this.layout.block.title.height + this.layout.padding + this.layout.block.half.height,
 		width: this.layout.block.half.width,
 		height: this.layout.block.half.height,
-		color: green
+		color: tan
 	}
 
 	this.heartRate = {
@@ -33,7 +33,7 @@ this.Vitals = function()
 		y: this.layout.padding * 3 + (this.layout.block.title.height) * 2 + this.layout.block.half.height * 2,
 		width: this.layout.block.full.width,
 		height: this.layout.block.full.height,
-		color: green
+		color: tan
 	}
 
 	this.respiratoryRate = {
@@ -41,7 +41,7 @@ this.Vitals = function()
 		y: this.layout.padding * 4 + (this.layout.block.title.height) * 3 + this.layout.block.half.height * 2 + this.layout.block.full.height,
 		width: this.layout.block.full.width,
 		height: this.layout.block.full.height,
-		color: green
+		color: tan
 	}
 
 	this.capnometer = new Capnometer()
@@ -57,10 +57,10 @@ this.Vitals = function()
 
 		// Blood pressure
 		this.layout.block.draw('blood pressure', '', this.bloodPressure)
-		this.typewriter.setAlignment('center').setColor(game.color).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5, this.bloodPressure.y + this.bloodPressure.height / 3 + this.bloodPressure.height / 18).write(Math.round(player.bloodPressure.top))
-		this.pencil.setColor(game.color).setPosition(this.bloodPressure.x + this.bloodPressure.width / 16, this.bloodPressure.y + this.layout.block.title.height + this.bloodPressure.height / 2.35 + this.bloodPressure.height / 18).setSize(this.bloodPressure.width / 3.5, 2).fillRectangle()
-		this.typewriter.setAlignment('center').setColor(game.color).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5, this.bloodPressure.y + this.bloodPressure.height / 3 * 2 + this.bloodPressure.height / 18).write(Math.round(player.bloodPressure.bottom))
-		this.typewriter.setAlignment('left').setColor(game.color).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5 * 2, this.bloodPressure.y + this.bloodPressure.height / 2 + this.bloodPressure.height / 18).write('mm hg')
+		this.typewriter.setAlignment('center').setColor(red).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5, this.bloodPressure.y + this.bloodPressure.height / 3 + this.bloodPressure.height / 18).write(Math.round(player.bloodPressure.top))
+		this.pencil.setColor(red).setPosition(this.bloodPressure.x + this.bloodPressure.width / 16, this.bloodPressure.y + this.layout.block.title.height + this.bloodPressure.height / 2.35 + this.bloodPressure.height / 18).setSize(this.bloodPressure.width / 3.5, 2).fillRectangle()
+		this.typewriter.setAlignment('center').setColor(red).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5, this.bloodPressure.y + this.bloodPressure.height / 3 * 2 + this.bloodPressure.height / 18).write(Math.round(player.bloodPressure.bottom))
+		this.typewriter.setAlignment('left').setColor(red).setSize(this.layout.block.content.fontSize).setPosition(this.bloodPressure.x + this.bloodPressure.width / 5 * 2, this.bloodPressure.y + this.bloodPressure.height / 2 + this.bloodPressure.height / 18).write('mm hg')
 
 		// Heart rate
 		this.layout.block.draw('heart rate', '', this.heartRate, Math.round(player.heart.rate) + ' beats per minute')

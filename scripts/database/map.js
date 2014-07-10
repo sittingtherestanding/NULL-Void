@@ -30,14 +30,14 @@ var Map = function()
 		var i = Math.floor(this.width / this.gridSpacing)
 		while (i--)
 		{
-			this.pencil.setColor(green).setOpacity(0.25).setStroke(1).setPosition(0, this.gridSpacing * i - this.camera.y).setEndPosition(l.dom.width, this.gridSpacing * i - this.camera.y).strokeLine()
+			this.pencil.setColor(gray).setOpacity(0.25).setStroke(1).setPosition(0, this.gridSpacing * i - this.camera.y).setEndPosition(l.dom.width, this.gridSpacing * i - this.camera.y).strokeLine()
 		}
 
 		// Column pass
 		var i = Math.floor(this.height / this.gridSpacing)
 		while (i--)
 		{
-			this.pencil.setColor(green).setOpacity(0.25).setStroke(1).setPosition(this.gridSpacing * i - this.camera.x, 0).setEndPosition(this.gridSpacing * i - this.camera.x, l.dom.height).strokeLine()
+			this.pencil.setColor(gray).setOpacity(0.25).setStroke(1).setPosition(this.gridSpacing * i - this.camera.x, 0).setEndPosition(this.gridSpacing * i - this.camera.x, l.dom.height).strokeLine()
 		}
 
 		this.calculateDraw(this.player)

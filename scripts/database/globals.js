@@ -1,6 +1,8 @@
-var blue = '#003366'
-var green = '#ccffcc'
-var red = '#ff6666'
+var black = '#2F343B'
+var gray = '#7E827A'
+var tan = '#E3CDA4'
+var orange = '#C77966'
+var red = '#703030'
 
 var daylight = 0
 

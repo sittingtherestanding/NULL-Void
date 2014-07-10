@@ -1,6 +1,6 @@
 var game = new Lorina()
 	game.setTitle('NULL Void')
-		.setColor(blue)
+		.setColor(black)
 		.setRoomSize(320, 568)
 		.setDomSize(320, 568)
 
@@ -56,25 +56,25 @@ var main = function()
 			if (player.temperature.value >= 100.4)
 			{
 				player.temperature.warning = true
-				vitals.bodyTemperature.color = red
+				vitals.bodyTemperature.color = orange
 			}
 
 			if (player.bloodPressure.bottom >= 100)
 			{
 				player.bloodPressure.warning = true
-				vitals.bloodPressure.color = red
+				vitals.bloodPressure.color = orange
 			}
 
 			if (player.heart.rate >= 100)
 			{
 				player.heart.warning = true
-				vitals.heartRate.color = red
+				vitals.heartRate.color = orange
 			}
 
 			if (player.breathing.rate >= 50)
 			{
 				player.breathing.warning = true
-				vitals.respiratoryRate.color = red
+				vitals.respiratoryRate.color = orange
 			}
 
 			// Causes of death

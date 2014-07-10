@@ -24,7 +24,7 @@ this.Ambiance = function()
     	self.i = Math.floor(l.room.height / self.spacing)
     	while (self.i--)
     	{
-    		self.pencil.setColor(green).setOpacity(self.opacity).setPosition(0, self.i * self.spacing + Math.round(self.offset)).setEndPosition(l.room.width, self.i * self.spacing + Math.round(self.offset)).setStroke(1).strokeLine()
+    		self.pencil.setColor(tan).setOpacity(self.opacity).setPosition(0, self.i * self.spacing + Math.round(self.offset)).setEndPosition(l.room.width, self.i * self.spacing + Math.round(self.offset)).setStroke(1).strokeLine()
     	}
 
         return self

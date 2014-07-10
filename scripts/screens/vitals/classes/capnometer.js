@@ -22,7 +22,7 @@ var Capnometer = function()
 		{
 			for (var i = this.history.length - width; i < this.history.length; i++)
 			{
-				this.pencil.setStroke(2).setColor(game.color).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
+				this.pencil.setStroke(2).setColor(red).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
 
 				this.currentX++
 			}
@@ -31,7 +31,7 @@ var Capnometer = function()
 		{
 			for (var i = 0; i < this.history.length; i++)
 			{
-				this.pencil.setStroke(2).setColor(game.color).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
+				this.pencil.setStroke(2).setColor(red).setPosition(x + this.currentX - 1, y + height / 2 + this.history[i - 1]).setEndPosition(x + this.currentX, y + height / 2 + this.history[i]).strokeLine()
 
 				this.currentX++
 			}

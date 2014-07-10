@@ -6,34 +6,34 @@ var Conditions = function()
 
     this.temperature = {
         x: this.layout.padding,
-        y: this.layout.navigation.y - (this.layout.padding * 1.5 + this.layout.block.tiny.height + this.layout.block.title.height) * 2,
+        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height) * 2,
         width: this.layout.block.tiny.width,
         height: this.layout.block.tiny.height,
-        color: green
+        color: tan
     }
 
     this.carbon = {
         x: this.layout.padding,
-        y: this.layout.navigation.y - (this.layout.padding * 1.5 + this.layout.block.tiny.height + this.layout.block.title.height),
+        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height),
         width: this.layout.block.tiny.width,
         height: this.layout.block.tiny.height,
-        color: green
+        color: tan
     }
 
     this.radiation = {
         x: l.room.width - this.layout.padding - this.layout.block.tiny.width,
-        y: this.layout.navigation.y - (this.layout.padding * 1.5 + this.layout.block.tiny.height + this.layout.block.title.height) * 2,
+        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height) * 2,
         width: this.layout.block.tiny.width,
         height: this.layout.block.tiny.height,
-        color: green
+        color: tan
     }
 
     this.wind = {
         x: l.room.width - this.layout.padding - this.layout.block.tiny.width,
-        y: this.layout.navigation.y - (this.layout.padding * 1.5 + this.layout.block.tiny.height + this.layout.block.title.height),
+        y: this.layout.navigation.y - (this.layout.padding + this.layout.block.tiny.height + this.layout.block.title.height),
         width: this.layout.block.tiny.width,
         height: this.layout.block.tiny.height,
-        color: green
+        color: tan
     }
 
     this.draw = function()
@@ -41,7 +41,7 @@ var Conditions = function()
         map.draw()
 
         // Draw a border around the map
-        this.pencil.setOpacity(this.layout.block.opacity).setPosition(this.layout.padding, this.layout.padding).setColor(green).setStroke(2).setSize(l.dom.width - this.layout.padding * 2, this.temperature.y - this.layout.padding * 2).strokeRectangle()
+        this.pencil.setOpacity(this.layout.block.opacity).setPosition(this.layout.padding, this.layout.padding).setColor(gray).setStroke(2).setSize(l.dom.width - this.layout.padding * 2, this.temperature.y - this.layout.padding * 2).strokeRectangle()
 
         // Block out map drawing that overflows the alloted space
         this.pencil.setPosition(0, 0).setColor(game.color).setSize(l.dom.width, this.layout.padding).fillRectangle()

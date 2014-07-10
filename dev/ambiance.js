@@ -1,4 +1,0 @@
-var screenScratches = function()
-{
-	
-}
