@@ -3,7 +3,7 @@ var colorTwo = '#C4D7ED'
 var colorThree = '#ABC8E2'
 var colorFour = '#375D81'
 var colorFive = '#183152'
-var colorWarning = '#D8634C'
+var colorWarning = '#CE495C'
 
 var game = new Lorina()
 	game.setTitle('NULL Void')

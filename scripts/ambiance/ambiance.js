@@ -49,7 +49,7 @@ this.Ambiance = function()
 	this.scanlines.draw = function() // Use 'draw' to keep with the syntax of everything else
 	{
 		var gap = 4
-		var opacity = 0.1
+		var opacity = 0.05
 		var speed = 0.25
 		
 		if (self.scanlines.position < gap)
@@ -64,12 +64,25 @@ this.Ambiance = function()
 		var i = Math.floor(l.room.height / gap)
 		while (i--)
 		{
-			self.pencil.setColor(colorOne).setOpacity(opacity).setPosition(0, i * gap + Math.round(self.scanlines.position)).setEndPosition(l.room.width, i * gap + Math.round(self.scanlines.position)).setStroke(1).strokeLine()
+			self.pencil.setColor(colorTwo).setOpacity(opacity).setPosition(0, i * gap + Math.round(self.scanlines.position)).setEndPosition(l.room.width, i * gap + Math.round(self.scanlines.position)).setStroke(1).strokeLine()
 		}
+	}
+
+	this.scratched = new Entity()
+	this.scratched.setSprite('images/ambiance/scratches.png')
+				  .setPosition(0, 0)
+				  .setStretch(l.room.width, l.room.height)
+				  .setOpacity(0.15)
+
+	this.scratches = new Object()
+	this.scratches.draw = function()
+	{
+		self.scratched.draw()
 	}
 
 	this.ice = new Entity()
 	this.ice.setSprite('images/ambiance/ice.jpg')
+			.setStretch(l.room.width, l.room.height)
 			.setPosition(0, 0)
 			.setOpacity(0)
 
@@ -81,41 +94,42 @@ this.Ambiance = function()
 			self.ice.opacity += 0.0005
 		}
 
-		self.ice.setStretch(l.room.width, l.room.height).draw()
+		self.ice.draw()
 	}
 
 	this.flakes = new Group()
-	this.xPadding = 50
-	this.stretchModifier = 40
 
 	this.snow = new Object()
 	this.snow.draw = function()
 	{
-		if (Math.round(self.tool.random(0, 2)) == 0)
+		var xPadding = 50
+		var stretchModifier = 35
+
+		if (Math.round(self.tool.random(0, 1)) == 0)
 		{
 			var flake = new Entity()
 				var random = Math.round(self.tool.random(1, 4))
 
 				if (random == 1)
 				{
-					flake.setSprite('images/ambiance/flake_1.png')
+					flake.setSprite('images/ambiance/snow/flake_1.png')
 				}
 				else if (random == 2)
 				{
-					flake.setSprite('images/ambiance/flake_2.png')
+					flake.setSprite('images/ambiance/snow/flake_2.png')
 				}
 				else if (random == 3)
 				{
-					flake.setSprite('images/ambiance/flake_3.png')
+					flake.setSprite('images/ambiance/snow/flake_3.png')
 				}
 				else if (random == 4)
 				{
-					flake.setSprite('images/ambiance/flake_4.png')
+					flake.setSprite('images/ambiance/snow/flake_4.png')
 				}			
 
 				flake.setOpacity(self.tool.random(0.3, 0.9))
-					 .setStretch(self.tool.random(55 - self.stretchModifier, 55 + self.stretchModifier), self.tool.random(55 - self.stretchModifier, 55 + self.stretchModifier))
-					 .setPosition(self.tool.random(-self.xPadding, l.room.width + self.xPadding), -self.xPadding)
+					 .setStretch(self.tool.random(55 - stretchModifier, 55 + stretchModifier), self.tool.random(55 - stretchModifier, 55 + stretchModifier))
+					 .setPosition(self.tool.random(-xPadding, l.room.width + xPadding), -xPadding)
 					 .setSize(55, 55)
 					 .setAnchor(28, 28)
 					 .setFriction(0)
@@ -126,5 +140,48 @@ this.Ambiance = function()
 		}
 
 		self.flakes.applyPhysics().draw()
+	}
+
+	this.sand = new Entity()
+	this.sand.setSprite('images/ambiance/sand/buildup.png')
+			 .setStretch(l.room.width, l.room.height)
+			 .setPosition(0, 0)
+			 .setOpacity(0)
+
+	this.buildup = new Object()
+	this.buildup.draw = function()
+	{
+		if (self.sand.opacity < 0.8)
+		{
+			self.sand.opacity += 0.0005
+		}
+
+		self.sand.draw()
+	}
+
+	this.clouds = new Group()
+
+	this.sandstorm = new Object()
+	this.sandstorm.draw = function()
+	{
+		var xPadding = 1000
+		var stretchModifier = 3000
+
+		if (Math.round(self.tool.random(0, 3)) == 0)
+		{
+			var cloud = new Entity()
+				cloud.setSprite('images/ambiance/sand/cloud.png')
+					 .setOpacity(self.tool.random(0.1, 0.4))
+					 .setStretch(self.tool.random(500, 500 + stretchModifier), self.tool.random(500, 500 + stretchModifier))
+					 .setPosition(self.tool.random(-xPadding, l.room.width + xPadding), 0 - 500 - stretchModifier)
+					 .setSize(500, 500)
+					 .setAnchor(250, 250)
+					 .setFriction(0)
+					 .pushVertical(self.tool.random(30, 60))
+					 .pushHorizontal(self.tool.random(-5, 5))
+			self.clouds.add(cloud)
+		}
+
+		self.clouds.applyPhysics().draw()
 	}
 }

@@ -131,8 +131,15 @@ var main = function()
 	navigation.draw()
 	ambiance.scanlines.draw()
 	ambiance.corners.draw()
+	ambiance.scratches.draw()
+
+	/*
 	ambiance.freezing.draw()
 	ambiance.snow.draw()
+	*/
+
+	ambiance.sandstorm.draw()
+	ambiance.buildup.draw()
 
 	game.draw()
 }
