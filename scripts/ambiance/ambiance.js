@@ -70,4 +70,20 @@ this.Ambiance = function()
 
 		return self
 	}
+
+	this.ice = new Entity()
+	this.ice.setSprite('images/ambiance/ice.jpg')
+			.setPosition(0, 0)
+			.setOpacity(0)
+
+	this.freezing = new Object()
+	this.freezing.draw = function()
+	{
+		if (self.ice.opacity < 0.5)
+		{
+			self.ice.opacity += 0.0005
+		}
+
+		self.ice.setStretch(l.room.width, l.room.height).draw()
+	}
 }

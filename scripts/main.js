@@ -131,6 +131,7 @@ var main = function()
 	navigation.draw()
 	ambiance.scanlines.draw()
 	ambiance.corners.draw()
+	ambiance.freezing.draw()
 
 	game.draw()
 }
