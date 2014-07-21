@@ -3,6 +3,7 @@ var Map = function()
 	this.pencil = new Pencil()
 	this.typewriter = new Typewriter()
 	this.typewriter.setFont('bioliquid')
+	this.clipper = new Clipper()
 
 	this.blocks = new Blocks()
 
@@ -74,21 +75,17 @@ var Map = function()
 
 	this.draw = function()
 	{
+		// Messy
+		var lower = bottom - padding * 1.5 - this.blocks.tiny.height * 2 - this.blocks.title.height * 2
+
+		this.clipper.start(padding, padding, l.room.width - padding * 2, lower - padding * 2)
 		this.place(this.terrain)
 
 		this.grid()
 
 		this.enemy.rotate(-0.75)
 		this.place(this.enemy, 'signal id', 'unknown')
-
-		// Messy
-		var lower = bottom - padding * 1.5 - this.blocks.tiny.height * 2 - this.blocks.title.height * 2
-
-		// Block out map drawing that overflows the alloted space
-        this.pencil.setPosition(0, 0).setColor(game.color).setSize(l.room.width, padding).fillRectangle()
-        this.pencil.setPosition(0, 0).setColor(game.color).setSize(padding, l.room.height).fillRectangle()
-        this.pencil.setPosition(l.room.width - padding, 0).setColor(game.color).setSize(padding, l.room.height).fillRectangle()
-        this.pencil.setPosition(0, lower - padding).setColor(game.color).setSize(l.room.width, l.room.height - lower + padding).fillRectangle()
+		this.clipper.end()
 
         // Draw a border around the map
         this.pencil.setPosition(padding, padding).setColor(colorThree).setStroke(2).setSize(l.room.width - padding * 2, lower - padding * 2).strokeRectangle()
