@@ -78,14 +78,14 @@ var Map = function()
 		// Messy
 		var lower = bottom - padding * 1.5 - this.blocks.tiny.height * 2 - this.blocks.title.height * 2
 
-		this.clipper.start(padding, padding, l.room.width - padding * 2, lower - padding * 2)
+		this.clipper.mark(padding, padding, l.room.width - padding * 2, lower - padding * 2)
 		this.place(this.terrain)
 
 		this.grid()
 
 		this.enemy.rotate(-0.75)
 		this.place(this.enemy, 'signal id', 'unknown')
-		this.clipper.end()
+		this.clipper.clip()
 
         // Draw a border around the map
         this.pencil.setPosition(padding, padding).setColor(colorThree).setStroke(2).setSize(l.room.width - padding * 2, lower - padding * 2).strokeRectangle()
