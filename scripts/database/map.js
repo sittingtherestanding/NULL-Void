@@ -16,8 +16,8 @@ var Map = function()
 	this.gridSpacing = 30
 
 	this.camera = {
-		x: -padding,
-		y: -padding
+		x: 0,
+		y: 0
 	}
 
 	this.terrain = new Entity()
@@ -25,8 +25,8 @@ var Map = function()
 				.setOpacity(0.65)
 				.setSize(1500, 1500)
 				.location = {
-					x: 0,
-					y: 0
+					x: padding,
+					y: padding
 				}
 
 	this.enemy = new Entity()

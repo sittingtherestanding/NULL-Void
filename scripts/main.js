@@ -29,18 +29,18 @@ var main = function()
 				map.camera.x -= mouse.x - mousePreviousX
 				map.camera.y -= mouse.y - mousePreviousY
 
-				if (map.camera.x < -padding)
+				if (map.camera.x < 0)
 				{
-					map.camera.x = -padding
+					map.camera.x = 0
 				}
 				else if (map.camera.x > map.width - l.dom.width)
 				{
 					map.camera.x = map.width - l.dom.width
 				}
 				
-				if (map.camera.y < -padding)
+				if (map.camera.y < 0)
 				{
-					map.camera.y = -padding
+					map.camera.y = 0
 				}
 				else if (map.camera.y > map.height - l.dom.height)
 				{
@@ -121,8 +121,8 @@ var main = function()
 	// ambiance.freezing.draw()
 	// ambiance.snow.draw()
 
-	ambiance.sandstorm.draw()
-	ambiance.buildup.draw()
+	// ambiance.sandstorm.draw()
+	// ambiance.buildup.draw()
 
 	game.draw()
 }
